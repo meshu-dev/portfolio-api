@@ -18,4 +18,15 @@ let userSchema = new mongoose.Schema({
     }
 )
 
+userSchema.set('toJSON', {
+    versionKey: false
+})
+
+userSchema.options.toJSON.transform = (doc, ret, options) => {
+    let idObj = { id: ret._id }
+    delete ret._id
+
+    return Object.assign({}, idObj, ret)
+}
+
 module.exports = mongoose.model('User', userSchema)

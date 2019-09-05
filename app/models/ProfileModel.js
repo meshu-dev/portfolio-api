@@ -41,4 +41,15 @@ let profileSchema = new mongoose.Schema({
     }
 )
 
+profileSchema.set('toJSON', {
+    versionKey: false
+})
+
+profileSchema.options.toJSON.transform = (doc, ret, options) => {
+    let idObj = { id: ret._id }
+    delete ret._id
+
+    return Object.assign({}, idObj, ret)
+}
+
 module.exports = mongoose.model('Profile', profileSchema)
