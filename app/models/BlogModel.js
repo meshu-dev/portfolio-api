@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 
-let blogSchema = new mongoose.Schema({
+let Schema = mongoose.Schema
+
+let blogSchema = new Schema({
         title: {
             type: String,
             unique: false,
@@ -20,5 +22,16 @@ let blogSchema = new mongoose.Schema({
         timestamps: true
     }
 )
+
+blogSchema.set('toJSON', {
+    versionKey: false
+})
+
+blogSchema.options.toJSON.transform = (doc, ret, options) => {
+    let idObj = { id: ret._id }
+    delete ret._id
+    
+    return Object.assign({}, idObj, ret)
+}
 
 module.exports = mongoose.model('Blog', blogSchema)
