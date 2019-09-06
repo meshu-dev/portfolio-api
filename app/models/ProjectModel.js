@@ -31,6 +31,9 @@ projectSchema.set('toJSON', {
 })
 
 projectSchema.options.toJSON.transform = (doc, ret, options) => {
+    ret.createdAt = (new Date(ret.createdAt)).toString()
+    ret.updatedAt = (new Date(ret.updatedAt)).toString()
+    
     let idObj = { id: ret._id }
     delete ret._id
 
