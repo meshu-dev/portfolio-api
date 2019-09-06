@@ -10,19 +10,12 @@ class ProjectController
             url:         req.body.url,
             thumbUrl:    req.body.thumbUrl
         }
-
         let project = await this.projectModel(data).save()
-
-        res.json({
-            project: project
-        })
+        res.json(project)
     }
     async read(req, res) {
         let project = await this.projectModel.find({ _id: req.params.id })
-
-        res.json({
-            project: project[0]
-        })
+        res.json(project[0] ? project[0] : {})
     }
     async readRows(req, res) {
         let params = req.query,
@@ -39,10 +32,8 @@ class ProjectController
         let projects = await this.projectModel.find({}, null, options),
             total = await this.projectModel.countDocuments({})
 
-        res.json({
-            projects: projects,
-            total: total
-        })
+        res.setHeader('X-Total-Count', total)
+        res.json(projects)
     }
     async update(req, res) {
         let data = {
@@ -51,16 +42,11 @@ class ProjectController
             url:         req.body.url,
             thumbUrl:    req.body.thumbUrl
         }
-
         let project = await this.projectModel.findOneAndUpdate({ _id: req.params.id }, { $set: data }, { new: true })
-
-        res.json({
-            project: project
-        })
+        res.json(project)
     }
     async delete(req, res) {
         let isDeleted = await this.projectModel.findOneAndDelete({ _id: req.params.id })
-
         res.json({})
     }
 }

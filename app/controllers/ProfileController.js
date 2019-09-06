@@ -13,19 +13,12 @@ class ProfileController
             email:       req.body.email,
             cvUrl:       req.body.cvUrl
         }
-
         let profile = await this.profileModel(data).save()
-
-        res.json({
-            profile: profile
-        })
+        res.json(profile)
     }
     async read(req, res) {
         let profile = await this.profileModel.find({ _id: req.params.id })
-
-        res.json({
-            profile: profile
-        })
+        res.json(profile[0] ? profile[0] : {})
     }
     async readRows(req, res) {
         let params  = req.query,
@@ -47,10 +40,8 @@ class ProfileController
         let profiles = await this.profileModel.find(filters, null, options),
             total = await this.profileModel.countDocuments({})
 
-        res.json({
-            profiles: profiles,
-            total: total
-        })
+        res.setHeader('X-Total-Count', total)
+        res.json(profiles)
     }
     async update(req, res) {
         let data = {
@@ -62,16 +53,11 @@ class ProfileController
             email:       req.body.email,
             cvUrl:       req.body.cvUrl
         }
-
         let profile = await this.profileModel.findOneAndUpdate({ _id: req.params.id }, { $set: data }, { new: true })
-
-        res.json({
-            profile: profile
-        })
+        res.json(profile)
     }
     async delete(req, res) {
         let isDeleted = await this.profileModel.findOneAndDelete({ _id: req.params.id })
-
         res.json({})
     }
 }

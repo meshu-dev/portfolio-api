@@ -9,19 +9,12 @@ class BlogController
 	        url:      req.body.url,
 	        thumbUrl: req.body.thumbUrl
 		}
-
         let blog = await this.blogModel(data).save()
-
-        res.json({
-            blog: blog
-        })
+        res.json(blog)
 	}
 	async read(req, res) {
 		let blog = await this.blogModel.find({ _id: req.params.id })
-
-        res.json({
-            blog: blog
-        })
+        res.json(blog[0] ? blog[0] : {})
 	}
 	async readRows(req, res) {
 		let params = req.query,
@@ -38,10 +31,8 @@ class BlogController
 		let blogs = await this.blogModel.find({}, null, options),
 			total = await this.blogModel.countDocuments({})
 
-        res.json({
-            blogs: blogs,
-            total: total
-        })
+		res.setHeader('X-Total-Count', total)
+        res.json(blogs)
 	}
 	async update(req, res) {
 		let data = {
@@ -49,16 +40,11 @@ class BlogController
 	        url:      req.body.url,
 	        thumbUrl: req.body.thumbUrl
 		}
-
 		let blog = await this.blogModel.findOneAndUpdate({ _id: req.params.id }, { $set: data }, { new: true })
-
-        res.json({
-            blog: blog
-        })
+        res.json(blog)
 	}
 	async delete(req, res) {
 		let isDeleted = await this.blogModel.findOneAndDelete({ _id: req.params.id })
-
         res.json({})
 	}
 }

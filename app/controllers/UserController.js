@@ -15,17 +15,11 @@ class UserController
 
         user.password = await bcrypt.hash(user.password, 10)
         user = await user.save()
-
-        res.json({
-            user: user
-        })
+        res.json(user)
     }
     async read(req, res) {
         let user = await this.userModel.find({ _id: req.params.id })
-
-        res.json({
-            user: user
-        })
+        res.json(user[0] ? user[0] : {})
     }
     async readRows(req, res) {
         let params = req.query,
@@ -42,26 +36,19 @@ class UserController
         let users = await this.userModel.find({}, null, options),
             total = await this.userModel.countDocuments({})
 
-        res.json({
-            users: users,
-            total: total
-        })
+        res.setHeader('X-Total-Count', total)
+        res.json(users)
     }
     async update(req, res) {
         let data = {
             username: req.body.username,
             password: req.body.password
         }
-
         let user = await this.userModel.findOneAndUpdate({ _id: req.params.id }, { $set: data }, { new: true })
-
-        res.json({
-            user: user
-        })
+        res.json(user)
     }
     async delete(req, res) {
         let isDeleted = await this.userModel.findOneAndDelete({ _id: req.params.id })
-
         res.json({})
     }
     async login(req, res) {
