@@ -5,18 +5,17 @@ exports.verify = (req, res, next) => {
         return next()
     }
 
-    /*
-    if (process.env.APP_ENV === 'dev') {
-        return next()
-    } */
+    let errorResponse = (res, code, msg) => {
+        return res.status(code)
+                  .json({
+                    message: msg
+                  })
+    }
 
     let token = req.headers['authorization']
 
     if (token === undefined) {
-        return res.status(401)
-                  .json({
-                    message: 'Access denied! Auth token is required'
-                  })
+        return errorResponse(res, 401, 'Authentication required')
     }
 
     try {
@@ -28,16 +27,13 @@ exports.verify = (req, res, next) => {
 
         next()
     } catch (err) {
-        let errMsg = 'An error occured! Please try again later',
+        let errMsg = 'Authentication failed! Please try again later',
             statusCode = 500
 
         if (err.name === 'TokenExpiredError') {
-            errMsg = 'Authentication required';
+            errMsg = 'Authentication required'
             statusCode = 401
         }
-        return res.status(statusCode)
-                  .json({
-                    message: errMsg
-                  })
+        return errorResponse(res, statusCode, errMsg)
     }
 }
