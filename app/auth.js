@@ -27,11 +27,17 @@ exports.verify = (req, res, next) => {
         req.user = data
 
         next()
-    } catch (ex) {
-        return res.status(400)
+    } catch (err) {
+        let errMsg = 'An error occured! Please try again later',
+            statusCode = 500
+
+        if (err.name === 'TokenExpiredError') {
+            errMsg = 'Authentication required';
+            statusCode = 401
+        }
+        return res.status(statusCode)
                   .json({
-                    message: 'Error! Token couldn\'t be verified',
-                    exception: ex
+                    message: errMsg
                   })
     }
 }
