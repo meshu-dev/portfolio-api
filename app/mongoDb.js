@@ -8,7 +8,7 @@ let mongoose = require('mongoose'),
 	};
 
 exports.connect = function() {
-    var url = `${mongoDbUrl}?authSource=` + process.env.MONGO_DB_NAME;
+    var url = `${mongoDbUrl}?authSource=` + process.env.MONGO_DB_AUTH_SOURCE;
 	mongoose.connect(url, options);
 
 	mongoose.connection.on('connected', function() {
