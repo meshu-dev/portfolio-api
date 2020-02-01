@@ -8,7 +8,8 @@ let mongoose = require('mongoose'),
 	};
 
 exports.connect = function() {
-	mongoose.connect(`${mongoDbUrl}?authSource=admin`, options);
+    var url = `${mongoDbUrl}?authSource=` + process.env.MONGO_DB_NAME;
+	mongoose.connect(url, options);
 
 	mongoose.connection.on('connected', function() {
 	    console.log(`Mongoose default connection is open to ${mongoDbUrl}`);
