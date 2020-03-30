@@ -1,14 +1,22 @@
 let mongoose = require('mongoose'),
 	mongoDbUrl = 'mongodb://' + process.env.MONGO_DB_HOST + ':' + process.env.MONGO_DB_PORT,
 	options = {
-		user: process.env.MONGO_DB_USERNAME,
-		pass: process.env.MONGO_DB_PASSWORD,
 		dbName: process.env.MONGO_DB_NAME,
 		useNewUrlParser: true
 	};
 
+if (process.env.MONGO_DB_USERNAME && process.env.MONGO_DB_PASSWORD) {
+    options['user'] = process.env.MONGO_DB_USERNAME;
+    options['pass'] = process.env.MONGO_DB_PASSWORD;
+}
+
 exports.connect = function() {
-    var url = `${mongoDbUrl}?authSource=` + process.env.MONGO_DB_AUTH_SOURCE;
+    let url = mongoDbUrl;
+
+    if (process.env.MONGO_DB_AUTH_SOURCE) {
+        url = `${url}?authSource=` + process.env.MONGO_DB_AUTH_SOURCE;
+    }
+
 	mongoose.connect(url, options);
 
 	mongoose.connection.on('connected', function() {
