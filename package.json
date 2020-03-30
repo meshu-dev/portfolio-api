@@ -7,11 +7,13 @@
         "start": "nodemon --watch app server.js"
     },
     "dependencies": {
+        "aws-sdk": "^2.648.0",
         "bcrypt": "^3.0.6",
         "dotenv": "^8.1.0",
         "express": "^4.16.3",
         "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.6.9"
+        "mongoose": "^5.6.9",
+        "multer": "^1.4.2"
     },
     "devDependencies": {
         "nodemon": "^1.19.1"

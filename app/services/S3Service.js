@@ -1,0 +1,49 @@
+class S3Service
+{
+	constructor(aws, s3, bucket) {
+		this.aws = aws;
+		this.s3 = s3;
+		this.bucket = bucket;
+	}
+	verifyCredentials() {
+		this.aws.config.getCredentials(function (err) {
+		  if (err) console.log(err.stack)
+		  else {
+		    console.log("Access key:", this.aws.config.credentials.accessKeyId);
+		    console.log("Secret access key:", this.aws.config.credentials.secretAccessKey);
+		  }
+		})
+	}
+	upload(key, fileStream, callback) {
+		let params = {
+			Bucket: this.bucket,
+			Key: key,
+			Body: fileStream,
+			ACL: "public-read"
+		};
+
+		this.s3.upload(params, callback);
+	}
+	get(key, callback) {
+		let params = {
+			Bucket: this.bucket,
+			Key: key
+		};
+
+		this.s3.getObject(params, function (err, data) {
+		   	if (err)
+		   		console.log(err, err.stack); // an error occurred
+		   	else
+		   		console.log(data);           // successful response
+		});
+	}
+	delete(key, callback) {
+		let params = {
+			Bucket: this.bucket,
+			Key: key
+		};
+		this.s3.deleteObject(params, callback);
+	}
+}
+
+module.exports = S3Service

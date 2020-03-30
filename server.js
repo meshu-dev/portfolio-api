@@ -12,7 +12,7 @@ let express    = require('express'),
 // Setup CORS to grant access to frontend website
 app.use(function(req, res, next) {
 	let allowedOrigins = [process.env.APP_FRONTEND_SITE, process.env.APP_ADMIN_SITE],
-		  origin = req.headers.origin
+		origin = req.headers.origin
 
 	if(origin && allowedOrigins.indexOf(origin) > -1) {
 	   res.setHeader('Access-Control-Allow-Origin', origin)
@@ -39,12 +39,14 @@ mongoDb.connect()
 let routePath = './app/routes',
 	index     = require(routePath + '/index'),
 	blogs     = require(routePath + '/blogs'),
+	images    = require(routePath + '/images'),
 	profiles  = require(routePath + '/profiles'),
     projects  = require(routePath + '/projects'),
     users     = require(routePath + '/users')
 
 app.use('/',         index)
 app.use('/blogs',    blogs)
+app.use('/images',   images)
 app.use('/profiles', profiles)
 app.use('/projects', projects)
 app.use('/users',    users)
