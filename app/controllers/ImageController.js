@@ -19,8 +19,6 @@ class ImageController
 	async create(req, res) {
 		let fileExt = this.imageHelper.getExtFromMimeType(req.file.mimetype);
 
-		//console.log('IMG', ImageController.imgThumbWidth, ImageController.imgThumbHeight);
-
 		let uploadData = await this.uploadImage(
 			req.file.path,
 			`${Date.now()}.${fileExt}`,
@@ -36,8 +34,9 @@ class ImageController
 		);
 
 		let data = {
-			filename: uploadData.Key,
-	        url:      uploadData.Location,
+			imageKey: uploadData.Key,
+			thumbKey: uploadThumbData.Key,
+	        imageUrl: uploadData.Location,
 	        thumbUrl: uploadThumbData.Location
 		}
         let image = await this.imageModel(data).save()
@@ -95,22 +94,20 @@ class ImageController
 		res.setHeader('X-Total-Count', total)
         res.json(images)
 	}
-	/*
-	async update(req, res) {
-		let data = {
-	        filename: req.body.filename,
-	        url:      req.body.url
-		}
-		let image = await this.imageModel.findOneAndUpdate({ _id: req.params.id }, { $set: data }, { new: true })
-        res.json(image)
-	} */
 	async delete(req, res) {
 		let image = await this.imageModel.find({ _id: req.params.id })
 		image = image[0] ? image[0] : {}
 
-		let result = await new Promise((resolve, reject) => {
+		let imageResult = await deleteImage(image.imageKey);
+		let thumbResult = await deleteImage(image.thumbKey);
+
+		let isDeleted = await this.imageModel.findOneAndDelete({ _id: req.params.id })
+        res.json({})
+	}
+	async deleteImage(key) {
+		return await new Promise((resolve, reject) => {
 	        this.imageService.delete(
-	        	image.filename,
+	        	key,
 				function (err, data) {
 				   	if (err)
 				   		console.log(err, err.stack); // an error occurred
@@ -121,9 +118,6 @@ class ImageController
 				}
 	        )
 		});
-
-		let isDeleted = await this.imageModel.findOneAndDelete({ _id: req.params.id })
-        res.json({})
 	}
 }
 

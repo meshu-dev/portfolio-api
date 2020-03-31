@@ -3,12 +3,17 @@ const mongoose = require('mongoose')
 let Schema = mongoose.Schema
 
 let imageSchema = new Schema({
-        filename: {
+        imageKey: {
             type: String,
-            unique: false,
+            unique: true,
             required: true
         },
-        url: {
+        thumbKey: {
+            type: String,
+            unique: true,
+            required: true
+        },
+        imageUrl: {
             type: String,
             unique: true,
             required: true

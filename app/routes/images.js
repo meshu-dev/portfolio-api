@@ -40,7 +40,6 @@ let upload = multer({ dest: 'uploads/' })
 router.post('/',      upload.single('image'), imageController.create.bind(imageController))
 router.get('/:id',    imageController.read.bind(imageController))
 router.get('/',       imageController.readRows.bind(imageController))
-//router.put('/:id',    imageController.update.bind(imageController))
 router.delete('/:id', imageController.delete.bind(imageController))
 
 module.exports = router
