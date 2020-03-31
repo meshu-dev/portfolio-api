@@ -12,6 +12,11 @@ let imageSchema = new Schema({
             type: String,
             unique: true,
             required: true
+        },
+        thumbUrl: {
+            type: String,
+            unique: true,
+            required: true
         }
     }, {
         timestamps: true

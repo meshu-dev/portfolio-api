@@ -5,14 +5,16 @@ class S3Service
 		this.s3 = s3;
 		this.bucket = bucket;
 	}
-	verifyCredentials() {
+	verifyCredentials(callback) {
+		this.aws.config.getCredentials(callback);
+		/*
 		this.aws.config.getCredentials(function (err) {
 		  if (err) console.log(err.stack)
 		  else {
 		    console.log("Access key:", this.aws.config.credentials.accessKeyId);
 		    console.log("Secret access key:", this.aws.config.credentials.secretAccessKey);
 		  }
-		})
+		}) */
 	}
 	upload(key, fileStream, callback) {
 		let params = {
@@ -21,7 +23,6 @@ class S3Service
 			Body: fileStream,
 			ACL: "public-read"
 		};
-
 		this.s3.upload(params, callback);
 	}
 	get(key, callback) {
@@ -29,13 +30,7 @@ class S3Service
 			Bucket: this.bucket,
 			Key: key
 		};
-
-		this.s3.getObject(params, function (err, data) {
-		   	if (err)
-		   		console.log(err, err.stack); // an error occurred
-		   	else
-		   		console.log(data);           // successful response
-		});
+		this.s3.getObject(params, callback);
 	}
 	delete(key, callback) {
 		let params = {

@@ -1,14 +1,67 @@
 class ImageController
 {
-	constructor(imageService, imageModel) {
-		this.imageService = imageService
+	static imgWidth = 400;
+	static imgHeight = 300;
+	static imgThumbWidth = 250;
+	static imgThumbHeight = 150;
+
+	constructor(
+		imageStorageService,
+		imageEditorService,
+		imageHelper,
+		imageModel
+	) {
+		this.imageStorageService = imageStorageService
+		this.imageEditorService = imageEditorService
+		this.imageHelper = imageHelper;
 		this.imageModel = imageModel
 	}
 	async create(req, res) {
-		let result = await new Promise((resolve, reject) => {
-	        this.imageService.upload(
-	        	req.file.path,
-	        	req.file.originalname,
+		let fileExt = this.imageHelper.getExtFromMimeType(req.file.mimetype);
+
+		//console.log('IMG', ImageController.imgThumbWidth, ImageController.imgThumbHeight);
+
+		let uploadData = await this.uploadImage(
+			req.file.path,
+			`${Date.now()}.${fileExt}`,
+			ImageController.imgWidth,
+			ImageController.imgHeight
+		);
+
+		let uploadThumbData = await this.uploadImage(
+			req.file.path,
+			`${Date.now()}.${fileExt}`,
+			ImageController.imgThumbWidth,
+			ImageController.imgThumbHeight
+		);
+
+		let data = {
+			filename: uploadData.Key,
+	        url:      uploadData.Location,
+	        thumbUrl: uploadThumbData.Location
+		}
+        let image = await this.imageModel(data).save()
+        res.json(image);
+	}
+	async uploadImage(
+		filePath,
+		filename,
+		width,
+		height
+	) {
+		let newFilePath = `uploads/${filename}`;
+
+		await this.imageEditorService.resize(
+			filePath,
+			newFilePath,
+			width,
+			height
+		)
+
+		return await new Promise((resolve, reject) => {
+	        this.imageStorageService.upload(
+	        	newFilePath,
+	        	filename,
 				function (err, data) {
 					if (err) {
 						console.log("Error", err);
@@ -19,13 +72,6 @@ class ImageController
 				}
 	        )
 		});
-		let data = {
-			filename: result.Key,
-	        url:      result.Location
-		}
-        let image = await this.imageModel(data).save()
-        res.json(image)
-
 	}
 	async read(req, res) {
 		let image = await this.imageModel.find({ _id: req.params.id })
