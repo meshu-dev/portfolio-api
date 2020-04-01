@@ -95,18 +95,27 @@ class ImageController
         res.json(images)
 	}
 	async delete(req, res) {
-		let image = await this.imageModel.find({ _id: req.params.id })
-		image = image[0] ? image[0] : {}
+		//let image = await this.imageModel.find({ _id: req.params.id })
+		//image = image[0] ? image[0] : {}
 
-		let imageResult = await deleteImage(image.imageKey);
-		let thumbResult = await deleteImage(image.thumbKey);
+		let imageKey = req.body.imageKey;
+		let thumbKey = req.body.thumbKey;
 
-		let isDeleted = await this.imageModel.findOneAndDelete({ _id: req.params.id })
+		console.log('imageKey', imageKey);
+		console.log('thumbKey', thumbKey);
+
+		let imageResult = await this.deleteImage(imageKey);
+		let thumbResult = await this.deleteImage(thumbKey);
+
+		console.log('imageResult', imageResult);
+		console.log('thumbResult', thumbResult);
+
+		//let isDeleted = await this.imageModel.findOneAndDelete({ _id: req.params.id })
         res.json({})
 	}
 	async deleteImage(key) {
 		return await new Promise((resolve, reject) => {
-	        this.imageService.delete(
+	        this.imageStorageService.delete(
 	        	key,
 				function (err, data) {
 				   	if (err)

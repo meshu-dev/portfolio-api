@@ -11,15 +11,10 @@ let projectSchema = new mongoose.Schema({
             unique: false,
             required: true
         },
-        url: {
-            type: String,
+        images: {
+            type: Array,
             unique: false,
-            required: true
-        },
-        thumbUrl: {
-            type: String,
-            unique: false,
-            required: true
+            required: false
         }
     }, {
         timestamps: true

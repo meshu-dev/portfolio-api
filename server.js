@@ -17,7 +17,8 @@ app.use(function(req, res, next) {
 	if(origin && allowedOrigins.indexOf(origin) > -1) {
 	   res.setHeader('Access-Control-Allow-Origin', origin)
 	}
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization')
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization, X-Total-Count')
+	res.header('Access-Control-Expose-Headers', 'X-Total-Count')
 	res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
 
   if (req.method === 'OPTIONS') {
