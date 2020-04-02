@@ -11,6 +11,11 @@ let projectSchema = new mongoose.Schema({
             unique: false,
             required: true
         },
+        githubUrl: {
+            type: String,
+            unique: false,
+            required: false
+        },
         images: {
             type: Array,
             unique: false,

@@ -7,6 +7,7 @@ class ProjectController
         let data = {
             title:       req.body.title,
             description: req.body.description,
+            githubUrl:   req.body.githubUrl,
             images:      req.body.images
         }
         let project = await this.projectModel(data).save()
@@ -38,6 +39,7 @@ class ProjectController
         let data = {
             title:       req.body.title,
             description: req.body.description,
+            githubUrl:   req.body.githubUrl,
             images:      req.body.images
         }
         let project = await this.projectModel.findOneAndUpdate({ _id: req.params.id }, { $set: data }, { new: true })
