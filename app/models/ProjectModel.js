@@ -16,6 +16,11 @@ let projectSchema = new mongoose.Schema({
             unique: false,
             required: false
         },
+        technologies: {
+            type: Array,
+            unique: false,
+            required: false
+        },
         images: {
             type: Array,
             unique: false,
