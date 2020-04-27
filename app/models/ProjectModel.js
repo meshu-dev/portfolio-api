@@ -11,12 +11,12 @@ let projectSchema = new mongoose.Schema({
             unique: false,
             required: true
         },
-        githubUrl: {
-            type: String,
+        technologies: {
+            type: Array,
             unique: false,
             required: false
         },
-        technologies: {
+        repositories: {
             type: Array,
             unique: false,
             required: false

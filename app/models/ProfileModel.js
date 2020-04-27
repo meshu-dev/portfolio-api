@@ -25,16 +25,6 @@ let profileSchema = new mongoose.Schema({
             type: String,
             unique: false,
             required: false
-        },
-        email: {
-            type: String,
-            unique: false,
-            required: false
-        },
-        cvUrl: {
-            type: String,
-            unique: false,
-            required: false
         }
     }, {
         timestamps: true

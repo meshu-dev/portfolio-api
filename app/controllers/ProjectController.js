@@ -7,8 +7,8 @@ class ProjectController
         let data = {
             title:        req.body.title,
             description:  req.body.description,
-            githubUrl:    req.body.githubUrl,
             technologies: req.body.technologies,
+            repositories: req.body.repositories,
             images:       req.body.images
         }
         let project = await this.projectModel(data).save()
@@ -38,11 +38,11 @@ class ProjectController
     }
     async update(req, res) {
         let data = {
-            title:       req.body.title,
-            description: req.body.description,
-            githubUrl:   req.body.githubUrl,
+            title:        req.body.title,
+            description:  req.body.description,
             technologies: req.body.technologies,
-            images:      req.body.images
+            repositories: req.body.repositories,
+            images:       req.body.images
         }
         let project = await this.projectModel.findOneAndUpdate({ _id: req.params.id }, { $set: data }, { new: true })
         res.json(project)

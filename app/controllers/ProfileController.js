@@ -9,9 +9,7 @@ class ProfileController
             jobTitle:    req.body.jobTitle,
             bio:         req.body.bio,
             githubUrl:   req.body.githubUrl,
-            linkedInUrl: req.body.linkedInUrl,
-            email:       req.body.email,
-            cvUrl:       req.body.cvUrl
+            linkedInUrl: req.body.linkedInUrl
         }
         let profile = await this.profileModel(data).save()
         res.json(profile)
@@ -49,9 +47,7 @@ class ProfileController
             jobTitle:    req.body.jobTitle,
             bio:         req.body.bio,
             githubUrl:   req.body.githubUrl,
-            linkedInUrl: req.body.linkedInUrl,
-            email:       req.body.email,
-            cvUrl:       req.body.cvUrl
+            linkedInUrl: req.body.linkedInUrl
         }
         let profile = await this.profileModel.findOneAndUpdate({ _id: req.params.id }, { $set: data }, { new: true })
         res.json(profile)
