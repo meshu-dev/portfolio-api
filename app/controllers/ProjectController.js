@@ -4,13 +4,16 @@ class ProjectController
         this.projectModel = projectModel
     }
     async create(req, res) {
+        const repositories = req.body.repositories.filter(Boolean);
+
         let data = {
             title:        req.body.title,
             description:  req.body.description,
             technologies: req.body.technologies,
-            repositories: req.body.repositories,
+            repositories: repositories,
             images:       req.body.images
         }
+
         let project = await this.projectModel(data).save()
         res.json(project)
     }
@@ -37,11 +40,13 @@ class ProjectController
         res.json(projects)
     }
     async update(req, res) {
+        const repositories = req.body.repositories.filter(Boolean);
+        
         let data = {
             title:        req.body.title,
             description:  req.body.description,
             technologies: req.body.technologies,
-            repositories: req.body.repositories,
+            repositories: repositories,
             images:       req.body.images
         }
         let project = await this.projectModel.findOneAndUpdate({ _id: req.params.id }, { $set: data }, { new: true })
