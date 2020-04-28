@@ -6,7 +6,8 @@ class ProfileController
     async create(req, res) {
         let data = {
             name:        req.body.name,
-            jobTitle:    req.body.jobTitle,
+            introLine1:  req.body.introLine1,
+            introLine2:  req.body.introLine2,
             bio:         req.body.bio,
             githubUrl:   req.body.githubUrl,
             linkedInUrl: req.body.linkedInUrl
@@ -44,7 +45,8 @@ class ProfileController
     async update(req, res) {
         let data = {
             name:        req.body.name,
-            jobTitle:    req.body.jobTitle,
+            introLine1:  req.body.introLine1,
+            introLine2:  req.body.introLine2,
             bio:         req.body.bio,
             githubUrl:   req.body.githubUrl,
             linkedInUrl: req.body.linkedInUrl

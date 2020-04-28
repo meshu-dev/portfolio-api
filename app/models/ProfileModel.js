@@ -6,10 +6,15 @@ let profileSchema = new mongoose.Schema({
             unique: false,
             required: true
         },
-        jobTitle: {
+        introLine1: {
             type: String,
             unique: false,
-            required: true
+            required: false
+        },
+        introLine2: {
+            type: String,
+            unique: false,
+            required: false
         },
         bio: {
             type: String,
