@@ -7,7 +7,7 @@ class ImageEditorService
 	}
 	async resize(filePath, newFilePath, width, height, callback) {
 		let options = {
-			fit: 'cover'
+			fit: 'fill'
 		};
 
 		await this.fileEditor(filePath)

@@ -1,9 +1,9 @@
 class ImageController
 {
-	static imgWidth = 400;
-	static imgHeight = 300;
-	static imgThumbWidth = 250;
-	static imgThumbHeight = 150;
+	static imgWidth = 650;
+	static imgHeight = 487;
+	static imgThumbWidth = 318;
+	static imgThumbHeight = 200;
 
 	constructor(
 		imageStorageService,
