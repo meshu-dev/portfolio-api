@@ -1,45 +1,47 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-let Schema = mongoose.Schema
+let Schema = mongoose.Schema;
 
-let imageSchema = new Schema({
-        imageKey: {
-            type: String,
-            unique: true,
-            required: true
-        },
-        thumbKey: {
-            type: String,
-            unique: true,
-            required: true
-        },
-        imageUrl: {
-            type: String,
-            unique: true,
-            required: true
-        },
-        thumbUrl: {
-            type: String,
-            unique: true,
-            required: true
-        }
-    }, {
-        timestamps: true
-    }
-)
+let imageSchema = new Schema(
+  {
+    imageKey: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    thumbKey: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    imageUrl: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+    thumbUrl: {
+      type: String,
+      unique: true,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 imageSchema.set('toJSON', {
-    versionKey: false
-})
+  versionKey: false,
+});
 
-imageSchema.options.toJSON.transform = (doc, ret, options) => {
-    ret.createdAt = (new Date(ret.createdAt)).toString()
-    ret.updatedAt = (new Date(ret.updatedAt)).toString()
-    
-    let idObj = { id: ret._id }
-    delete ret._id
-    
-    return Object.assign({}, idObj, ret)
-}
+imageSchema.options.toJSON.transform = (doc, ret) => {
+  ret.createdAt = new Date(ret.createdAt).toString();
+  ret.updatedAt = new Date(ret.updatedAt).toString();
 
-module.exports = mongoose.model('Image', imageSchema)
+  let idObj = {id: ret._id};
+  delete ret._id;
+
+  return Object.assign({}, idObj, ret);
+};
+
+module.exports = mongoose.model('Image', imageSchema);

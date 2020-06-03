@@ -1,39 +1,38 @@
-const jwt = require('jsonwebtoken')
+let jwt = require('jsonwebtoken');
 
 exports.verify = (req, res, next) => {
   if (req.method === 'GET' || req.url === '/users/login') {
-    return next()
+    return next();
   }
 
   let errorResponse = (res, code, msg) => {
-    return res.status(code)
-              .json({
-                message: msg
-              })
-  }
+    return res.status(code).json({
+      message: msg,
+    });
+  };
 
-  let token = req.headers['authorization']
+  let token = req.headers['authorization'];
 
   if (token === undefined) {
-    return errorResponse(res, 401, 'Authentication required')
+    return errorResponse(res, 401, 'Authentication required');
   }
 
   try {
-    token = token.replace('Bearer', '')
-    token = token.trim()
+    token = token.replace('Bearer', '');
+    token = token.trim();
 
-    const data = jwt.verify(token, process.env.JWT_PRIVATE_KEY)
-    req.user = data
+    const data = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+    req.user = data;
 
-    next()
+    next();
   } catch (err) {
     let errMsg = 'Authentication failed! Please try again later',
-        statusCode = 500
+      statusCode = 500;
 
     if (err.name === 'TokenExpiredError') {
-        errMsg = 'Authentication required'
-        statusCode = 401
+      errMsg = 'Authentication required';
+      statusCode = 401;
     }
-    return errorResponse(res, statusCode, errMsg)
+    return errorResponse(res, statusCode, errMsg);
   }
-}
+};

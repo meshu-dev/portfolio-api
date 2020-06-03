@@ -1,10 +1,9 @@
-class IndexController
-{
-	index(req, res) {
-	    res.json({
-	    	status: 'API is fine'
-	    })
-	}
+class IndexController {
+  index(req, res) {
+    res.json({
+      status: 'API is fine',
+    });
+  }
 }
 
-module.exports = IndexController
+module.exports = IndexController;

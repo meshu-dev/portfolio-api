@@ -1,40 +1,42 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
-let Schema = mongoose.Schema
+let Schema = mongoose.Schema;
 
-let blogSchema = new Schema({
-        title: {
-            type: String,
-            unique: false,
-            required: true
-        },
-        url: {
-            type: String,
-            unique: false,
-            required: true
-        },
-        thumbUrl: {
-            type: String,
-            unique: false,
-            required: true
-        }
-    }, {
-        timestamps: true
-    }
-)
+let blogSchema = new Schema(
+  {
+    title: {
+      type: String,
+      unique: false,
+      required: true,
+    },
+    url: {
+      type: String,
+      unique: false,
+      required: true,
+    },
+    thumbUrl: {
+      type: String,
+      unique: false,
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 blogSchema.set('toJSON', {
-    versionKey: false
-})
+  versionKey: false,
+});
 
-blogSchema.options.toJSON.transform = (doc, ret, options) => {
-    ret.createdAt = (new Date(ret.createdAt)).toString()
-    ret.updatedAt = (new Date(ret.updatedAt)).toString()
-    
-    let idObj = { id: ret._id }
-    delete ret._id
-    
-    return Object.assign({}, idObj, ret)
-}
+blogSchema.options.toJSON.transform = (doc, ret) => {
+  ret.createdAt = new Date(ret.createdAt).toString();
+  ret.updatedAt = new Date(ret.updatedAt).toString();
 
-module.exports = mongoose.model('Blog', blogSchema)
+  let idObj = {id: ret._id};
+  delete ret._id;
+
+  return Object.assign({}, idObj, ret);
+};
+
+module.exports = mongoose.model('Blog', blogSchema);
