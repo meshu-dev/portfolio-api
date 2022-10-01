@@ -1,6 +1,8 @@
 let jwt = require('jsonwebtoken');
 
 exports.verify = (req, res, next) => {
+  //return next();
+  
   if (req.method === 'GET' || req.url === '/users/login') {
     return next();
   }
