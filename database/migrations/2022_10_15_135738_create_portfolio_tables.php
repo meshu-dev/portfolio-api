@@ -15,15 +15,21 @@ return new class extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
             $table->text('url');
+        });
+
+        Schema::create('image_thumbnails', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('image_id');
+            $table->text('url');
+
+            $table->foreign('image_id')->references('id')->on('images');
         });
 
         Schema::create('repositories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('url');
-            $table->string('name');
         });
 
         Schema::create('technologies', function (Blueprint $table) {
@@ -56,6 +62,15 @@ return new class extends Migration
             $table->foreign('technology_id')->references('id')->on('technologies');
         });
 
+        Schema::create('project_images', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('image_id');
+
+            $table->foreign('project_id')->references('id')->on('projects');
+            $table->foreign('image_id')->references('id')->on('images');
+        });
+
         Schema::create('prototypes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
@@ -80,6 +95,15 @@ return new class extends Migration
             $table->foreign('prototype_id')->references('id')->on('prototypes');
             $table->foreign('technology_id')->references('id')->on('technologies');
         });
+
+        Schema::create('prototype_images', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('prototype_id');
+            $table->unsignedBigInteger('image_id');
+
+            $table->foreign('prototype_id')->references('id')->on('prototypes');
+            $table->foreign('image_id')->references('id')->on('images');
+        });
     }
 
     /**
@@ -92,14 +116,17 @@ return new class extends Migration
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');
 
         Schema::dropIfExists('images');
+        Schema::dropIfExists('image_thumbnails');
         Schema::dropIfExists('repositories');
         Schema::dropIfExists('technologies');
         Schema::dropIfExists('prototypes');
         Schema::dropIfExists('prototype_repositories');
         Schema::dropIfExists('prototype_technologies');
+        Schema::dropIfExists('prototype_images');
         Schema::dropIfExists('projects');
         Schema::dropIfExists('project_repositories');
         Schema::dropIfExists('project_technologies');
+        Schema::dropIfExists('project_images');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }

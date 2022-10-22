@@ -3,14 +3,15 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use App\Models\ImageThumbnail;
 use App\Models\Image;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Image>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\ImageThumbnail>
  */
-class ImageFactory extends Factory
+class ImageThumbnailFactory extends Factory
 {
-    protected $model = Image::class;
+    protected $model = ImageThumbnail::class;
 
     /**
      * Define the model's default state.
@@ -20,6 +21,7 @@ class ImageFactory extends Factory
     public function definition()
     {
         return [
+            'image_id' => Image::all()->random()->id,
             'url' => fake()->imageUrl()
         ];
     }

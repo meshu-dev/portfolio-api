@@ -18,4 +18,9 @@ class Prototype extends BaseModel
     {
         return $this->belongsToMany(Technology::class, 'prototype_technologies', 'prototype_id', 'technology_id');
     }
+
+    public function images()
+    {
+        return $this->belongsToMany(Image::class, 'prototype_images', 'prototype_id', 'image_id');
+    }
 }

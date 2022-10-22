@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Repositories\ImageRepository;
 use App\Http\Resources\ImageResource;
 use App\Validators\ImageValidator;
+use App\Services\ImageService;
 
 class ImageController extends Controller
 {
@@ -12,15 +13,23 @@ class ImageController extends Controller
 
     public function __construct(
         protected ImageRepository $imageRepository,
-        protected ImageValidator $imageValidator
+        protected ImageValidator $imageValidator,
+        protected ImageService $imageService
     ) { }
 
     public function add(Request $request)
     {
         $params = $request->all();
-        $this->imageValidator->verifyAdd($params);
-        
-        $row = $this->imageRepository->add($params);
+
+        //dd($params);
+        //$this->imageValidator->verifyAdd($params);
+
+        $image = $request->file('image');
+
+        $row = $this->imageService->add(
+            $params['name'],
+            $image
+        );
 
         return $this->getResponse($row, 201);
     }
