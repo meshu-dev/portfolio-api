@@ -9,6 +9,11 @@ class Project extends BaseModel
 
     protected $table = 'projects';
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
     public function repositories()
     {
         return $this->belongsToMany(Repository::class, 'project_repositories', 'project_id', 'repository_id');

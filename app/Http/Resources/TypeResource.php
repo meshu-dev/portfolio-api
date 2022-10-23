@@ -4,7 +4,7 @@ namespace App\Http\Resources;
  
 use Illuminate\Http\Resources\Json\JsonResource;
  
-class PrototypeListResource extends JsonResource
+class TypeResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,9 +16,7 @@ class PrototypeListResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'type' => new TypeResource($this->type),
-            'name' => $this->name,
-            'image' => new ImageResource($this->images[0])
+            'name' => $this->name
         ];
     }
 }

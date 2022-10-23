@@ -16,8 +16,9 @@ class ProjectListResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'type' => new TypeResource($this->type),
             'name' => $this->name,
-            'description' => $this->description
+            'image' => new ImageResource($this->images[0])
         ];
     }
 }

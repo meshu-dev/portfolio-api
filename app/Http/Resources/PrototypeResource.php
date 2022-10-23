@@ -16,10 +16,12 @@ class PrototypeResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'type' => new TypeResource($this->type),
             'name' => $this->name,
             'description' => $this->description,
             'repositories' => RepositoryResource::collection($this->repositories),
-            'technologies' => TechnologyResource::collection($this->technologies)
+            'technologies' => TechnologyResource::collection($this->technologies),
+            'images' => ImageResource::collection($this->images)
         ];
     }
 }

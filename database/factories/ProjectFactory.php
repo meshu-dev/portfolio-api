@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Project;
+use App\Models\Type;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Project>
@@ -19,7 +20,10 @@ class ProjectFactory extends Factory
      */
     public function definition()
     {
+        $typeIds = Type::all()->pluck('id');
+
         return [
+            'type_id' => fake()->randomElement($typeIds),
             'name' => fake()->company(),
             'description' => fake()->text(200)
         ];

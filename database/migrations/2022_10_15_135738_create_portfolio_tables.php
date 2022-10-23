@@ -37,11 +37,19 @@ return new class extends Migration
             $table->string('name');
         });
 
+        Schema::create('types', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+        });
+
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('type_id');
             $table->string('name');
             $table->string('description');
             $table->smallInteger('order')->default(0);
+
+            $table->foreign('type_id')->references('id')->on('types');
         });
 
         Schema::create('project_repositories', function (Blueprint $table) {
@@ -73,9 +81,12 @@ return new class extends Migration
 
         Schema::create('prototypes', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('type_id');
             $table->string('name');
             $table->string('description');
             $table->smallInteger('order')->default(0);
+
+            $table->foreign('type_id')->references('id')->on('types');
         });
 
         Schema::create('prototype_repositories', function (Blueprint $table) {
@@ -119,6 +130,7 @@ return new class extends Migration
         Schema::dropIfExists('image_thumbnails');
         Schema::dropIfExists('repositories');
         Schema::dropIfExists('technologies');
+        Schema::dropIfExists('types');
         Schema::dropIfExists('prototypes');
         Schema::dropIfExists('prototype_repositories');
         Schema::dropIfExists('prototype_technologies');

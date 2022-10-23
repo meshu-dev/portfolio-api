@@ -9,6 +9,11 @@ class Prototype extends BaseModel
 
     protected $table = 'prototypes';
 
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
     public function repositories()
     {
         return $this->belongsToMany(Repository::class, 'prototype_repositories', 'prototype_id', 'repository_id');
