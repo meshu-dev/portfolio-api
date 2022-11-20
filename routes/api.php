@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TechnologyController;
+use App\Http\Controllers\TypeController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\PrototypeController;
@@ -46,6 +47,14 @@ Route::middleware('auth:sanctum')->group(function ($router) {
         Route::post('/', [TechnologyController::class, 'add']);
         Route::put('/{id}', [TechnologyController::class, 'edit']);
         Route::delete('/{id}', [TechnologyController::class, 'delete']);    
+    });
+
+    Route::group(['prefix' => 'types'], function ($router) {
+        Route::get('/', [TypeController::class, 'getAll']);
+        Route::get('/{id}', [TypeController::class, 'get']);
+        Route::post('/', [TypeController::class, 'add']);
+        Route::put('/{id}', [TypeController::class, 'edit']);
+        Route::delete('/{id}', [TypeController::class, 'delete']);    
     });
 
     Route::group(['prefix' => 'images'], function ($router) {
