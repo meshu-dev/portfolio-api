@@ -8,4 +8,6 @@ class Technology extends BaseModel
     use HasFactory;
 
     protected $table = 'technologies';
+
+    protected $fillable = ['name'];
 }
