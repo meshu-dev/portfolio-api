@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\FileController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +18,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/image/{filename}', [FileController::class, 'getImage'])->name('image');
+Route::get('/image/thumb/{filename}', [FileController::class, 'getThumb'])->name('thumb');

@@ -20,15 +20,15 @@ class ImageController extends Controller
     public function add(Request $request)
     {
         $params = $request->all();
-
-        //dd($params);
-        //$this->imageValidator->verifyAdd($params);
+        $this->imageValidator->verifyAdd($params);
 
         $image = $request->file('image');
+        $includeThumb = (bool) $params['thumb'];
 
         $row = $this->imageService->add(
-            $params['name'],
-            $image
+            $params['name'] ?? '',
+            $image,
+            $includeThumb
         );
 
         return $this->getResponse($row, 201);

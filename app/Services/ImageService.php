@@ -3,41 +3,50 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
 use App\Repositories\ImageRepository;
+use App\Repositories\ImageThumbnailRepository;
 use Image;
 
 class ImageService
 {
     public function __construct(
-        protected ImageRepository $imageRepository
+        protected ImageRepository $imageRepository,
+        protected ImageThumbnailRepository $imageThumbnailRepository
     ) { }
 
-    public function add($name, $file)
+    public function add($name, $file, $includeThumb = false)
     {
         $image = $this->addUploadedImage($name, $file);
-        $thumbImage = $this->addThumb($name, $file);
 
+        if ($includeThumb === true) {
+            $thumbImage = $this->addThumb($image->id, $name, $file);
+        }
 
-
-        dd('Done!', $image, $thumbImage);
+        return $image;
     }
 
-    protected function addThumb($name, $file)
+    protected function addThumb($imageId, $name, $file)
     {
-        return $this->addImage(
-            $name,
-            $file,
-            "app/test/thumbs",
-            true
-        );
+        $path = 'app/test/thumbs';
+        $image = $this->addImage($name, $file, $path, true);
+        $url = $this->getUrlPath('thumb', $image->basename);
+
+        $params = [
+            'image_id' => $imageId,
+            'url' => $url
+        ];
+
+        return $this->imageThumbnailRepository->add($params);
     }
 
     protected function addUploadedImage($name, $file)
-    {
-        return $this->addImage(
-            $name,
-            $file,
-            "app/test/uploads"
-        );
+    {   
+        $path = 'app/test/uploads';
+        $image = $this->addImage($name, $file, $path);
+        $url = $this->getUrlPath('image', $image->basename);
+
+        $params = ['url' => $url];
+
+        return $this->imageRepository->add($params);
     }
 
     protected function saveImage($file, $filePath, $isThumb = false)
@@ -64,12 +73,14 @@ class ImageService
         $filePath = "$uploadPath/$filename";
 
         $imgFile = $this->saveImage($file, $filePath, $isThumb);
+        return $imgFile;
+    }
 
-        $params = [
-            'name' => $name,
-            'url' => $storagePath
-        ];
-        $row = $this->imageRepository->add($params);
-        return $row;
+    protected function getUrlPath($routeName, $filename)
+    {
+        $url = route($routeName, ['filename' => $filename]);
+        $url = parse_url($url, PHP_URL_PATH);
+        
+        return $url;
     }
 }

@@ -9,5 +9,5 @@ class ImageThumbnail extends BaseModel
 
     protected $table = 'image_thumbnails';
 
-    protected $fillable = ['url'];
+    protected $fillable = ['image_id', 'url'];
 }

@@ -8,6 +8,7 @@ class ImageValidator extends ApiValidator
     ];
 
     protected $rules = [
-        'name' => 'required|max:100|unique:App\Models\Image,name'
+        'image' => 'required|file',
+        'thumb' => 'in:true,false'
     ];
 }
