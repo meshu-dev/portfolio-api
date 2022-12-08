@@ -8,6 +8,8 @@ class PrototypeValidator extends ApiValidator
     ];
 
     protected $rules = [
-        'name' => 'required|max:100|unique:App\Models\Prototype,name'
+        'name' => 'required|max:100|unique:App\Models\Prototype,name',
+        'repositoryIds' => 'required',
+        'technologyIds' => 'required'
     ];
 }

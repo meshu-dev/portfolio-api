@@ -14,9 +14,15 @@ class ImageThumbnailResource extends JsonResource
      */
     public function toArray($request)
     {
+        if (str_contains($this->url, 'http') === true) {
+            $url = $this->url;
+        } else {
+            $url = env('IMAGE_URL') . $this->url;
+        }
+
         return [
             'id' => $this->id,
-            'url' => env('IMAGE_URL') . $this->url
+            'url' => $url
         ];
     }
 }
