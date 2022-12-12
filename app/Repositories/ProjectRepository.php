@@ -19,9 +19,9 @@ class ProjectRepository extends ModelRepository
         ];
         $project = parent::add($modelParams);
 
-        $project->repositories()->attach($params['repositoryIds']);
-        $project->technologies()->attach($params['technologyIds']);
-        $project->images()->attach($params['imageIds']);
+        $project->repositories()->attach($params['repositoryIds'] ?? []);
+        $project->technologies()->attach($params['technologyIds'] ?? []);
+        $project->images()->attach($params['imageIds'] ?? []);
 
         return $project;
     }
@@ -35,9 +35,9 @@ class ProjectRepository extends ModelRepository
         $project->description = $params['description'];
         $project->save();
 
-        $project->repositories()->sync($params['repositoryIds']);
-        $project->technologies()->sync($params['technologyIds']);
-        $project->images()->sync($params['imageIds']);
+        $project->repositories()->sync($params['repositoryIds'] ?? []);
+        $project->technologies()->sync($params['technologyIds'] ?? []);
+        $project->images()->sync($params['imageIds'] ?? []);
 
         return $project;
     }

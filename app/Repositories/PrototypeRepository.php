@@ -19,9 +19,9 @@ class PrototypeRepository extends ModelRepository
         ];
         $prototype = parent::add($modelParams);
 
-        $prototype->repositories()->attach($params['repositoryIds']);
-        $prototype->technologies()->attach($params['technologyIds']);
-        $prototype->images()->attach($params['imageIds']);
+        $prototype->repositories()->attach($params['repositoryIds'] ?? []);
+        $prototype->technologies()->attach($params['technologyIds'] ?? []);
+        $prototype->images()->attach($params['imageIds'] ?? []);
 
         return $prototype;
     }
@@ -35,9 +35,9 @@ class PrototypeRepository extends ModelRepository
         $prototype->description = $params['description'];
         $prototype->save();
 
-        $prototype->repositories()->sync($params['repositoryIds']);
-        $prototype->technologies()->sync($params['technologyIds']);
-        $prototype->images()->sync($params['imageIds']);
+        $prototype->repositories()->sync($params['repositoryIds'] ?? []);
+        $prototype->technologies()->sync($params['technologyIds'] ?? []);
+        $prototype->images()->sync($params['imageIds'] ?? []);
 
         return $prototype;
     }
