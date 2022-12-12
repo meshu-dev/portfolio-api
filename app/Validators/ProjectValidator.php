@@ -8,6 +8,10 @@ class ProjectValidator extends ApiValidator
     ];
 
     protected $rules = [
-        'name' => 'required|max:100|unique:App\Models\Project,name'
+        'name' => 'required|max:100',
+        'description' => 'required',
+        'typeId' => 'required',
+        'repositoryIds' => 'required',
+        'technologyIds' => 'required'
     ];
 }

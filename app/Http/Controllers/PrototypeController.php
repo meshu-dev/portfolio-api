@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\PrototypeRepository;
-use App\Http\Resources\PrototypeListResource;
 use App\Http\Resources\PrototypeResource;
 use App\Validators\PrototypeValidator;
 
@@ -40,7 +39,6 @@ class PrototypeController extends Controller
         $params = $request->all();
         $rows = $this->prototypeRepository->getAll($params);
 
-        $this->resource = PrototypeListResource::class;
         return $this->getResponse($rows, 200);
     }
 

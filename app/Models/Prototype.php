@@ -8,6 +8,7 @@ class Prototype extends BaseModel
     use HasFactory;
 
     protected $table = 'prototypes';
+    protected $fillable = ['type_id', 'name', 'description'];
 
     public function type()
     {

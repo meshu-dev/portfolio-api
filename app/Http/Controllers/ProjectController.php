@@ -3,7 +3,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repositories\ProjectRepository;
-use App\Http\Resources\ProjectListResource;
 use App\Http\Resources\ProjectResource;
 use App\Validators\ProjectValidator;
 
@@ -40,7 +39,6 @@ class ProjectController extends Controller
         $params = $request->all();
         $rows = $this->projectRepository->getAll($params);
 
-        $this->resource = ProjectListResource::class;
         return $this->getResponse($rows, 200);
     }
 
