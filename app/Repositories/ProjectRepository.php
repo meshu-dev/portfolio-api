@@ -42,6 +42,26 @@ class ProjectRepository extends ModelRepository
         return $project;
     }
 
+    public function getByType($id)
+    {
+        return $this->model->where('type_id', $id)->get();
+    }
+
+    public function getByRepository($id)
+    {
+        return $this->model->whereRelation('repositories', 'repository_id', '=', $id)->get();
+    }
+
+    public function getByTechnology($id)
+    {
+        return $this->model->whereRelation('technologies', 'technology_id', '=', $id)->get();
+    }
+
+    public function getByImage($id)
+    {
+        return $this->model->whereRelation('images', 'image_id', '=', $id)->get();
+    }
+
     public function delete($id)
     {
         $project = $this->get($id);

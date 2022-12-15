@@ -10,7 +10,7 @@ class ValidationException extends Exception
 
     public function __construct(
         protected $validationMsgs,
-        $message,
+        $message = 'Errors occurred because validation didn\'t pass',
         $code = 0,
         Throwable $previous = null
     ) {

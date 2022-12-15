@@ -59,7 +59,7 @@ class TechnologyController extends Controller
 
     public function delete(Request $request, int $id)
     {
-        $this->technologyValidator->verifyExists($id);
+        $this->technologyValidator->verifyDelete($id);
 
         $this->technologyRepository->delete($id);
 

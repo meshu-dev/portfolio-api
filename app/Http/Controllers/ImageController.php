@@ -78,7 +78,7 @@ class ImageController extends Controller
 
     public function delete(Request $request, int $id)
     {
-        $this->imageValidator->verifyExists($id);
+        $this->imageValidator->verifyDelete($id);
 
         $this->imageRepository->delete($id);
 

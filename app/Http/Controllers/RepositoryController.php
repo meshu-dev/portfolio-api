@@ -59,7 +59,7 @@ class RepositoryController extends Controller
 
     public function delete(Request $request, int $id)
     {
-        $this->repositoryValidator->verifyExists($id);
+        $this->repositoryValidator->verifyDelete($id);
 
         $this->repositoryRepository->delete($id);
 

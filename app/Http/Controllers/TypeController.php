@@ -59,7 +59,7 @@ class TypeController extends Controller
 
     public function delete(Request $request, int $id)
     {
-        $this->typeValidator->verifyExists($id);
+        $this->typeValidator->verifyDelete($id);
 
         $this->typeRepository->delete($id);
 
