@@ -12,17 +12,24 @@ class TypeValidator extends ApiValidator
     ];
 
     protected $rules = [
-        'name' => 'required|max:100'
+        'name' => [
+            'required',
+            'max:100'
+        ]
     ];
 
     public function __construct(protected TypeService $typeService) { }
 
+    public function verifyAdd(array $params): ValidationException|bool
+    {
+        $this->addUniqueRule();
+
+        return parent::verifyAdd($params);
+    }
+
     public function verifyEdit(int $id, array $params): ValidationException|bool
     {
-        $this->rules['name'] = [
-            $this->rules['name'],
-            $this->getUniqueRule('types', $id)
-        ];
+        $this->addUniqueRule($id);
 
         return parent::verifyEdit($id, $params);
     }
@@ -39,5 +46,10 @@ class TypeValidator extends ApiValidator
             );
         }
         return true;
+    }
+
+    protected function addUniqueRule($id = 0)
+    {
+        $this->rules['name'][] = $this->getUniqueRule('types', $id);
     }
 }

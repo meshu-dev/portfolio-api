@@ -14,9 +14,9 @@ class TypeService
     public function isUsed($typeId)
     {
         $projects = $this->projectRepository->getByType($typeId);
-        $prototypes = $this->prototypeRepository->getByType($typeId); 
+        $prototypes = $this->prototypeRepository->getByType($typeId);
 
-        if (empty($projects) === true && empty($prototypes) === true) {
+        if ($projects->count() === 0 && $prototypes->count() === 0) {
             return false;
         }
         return true;

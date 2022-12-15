@@ -11,17 +11,24 @@ class RepositoryValidator extends ApiValidator
     ];
 
     protected $rules = [
-        'name' => 'required|max:100|unique:App\Models\Repository,name'
+        'name' => [
+            'required',
+            'max:100'
+        ]
     ];
 
     public function __construct(protected RepositoryService $repositoryService) { }
 
+    public function verifyAdd(array $params): ValidationException|bool
+    {
+        $this->addUniqueRule();
+
+        return parent::verifyAdd($params);
+    }
+
     public function verifyEdit(int $id, array $params): ValidationException|bool
     {
-        $this->rules['name'] = [
-            $this->rules['name'],
-            $this->getUniqueRule('repositories', $id)
-        ];
+        $this->addUniqueRule($id);
 
         return parent::verifyEdit($id, $params);
     }
@@ -38,5 +45,10 @@ class RepositoryValidator extends ApiValidator
             );
         }
         return true;
+    }
+
+    protected function addUniqueRule($id = 0)
+    {
+        $this->rules['name'][] = $this->getUniqueRule('repositories', $id);
     }
 }

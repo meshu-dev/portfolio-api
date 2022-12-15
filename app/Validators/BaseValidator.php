@@ -20,8 +20,13 @@ abstract class BaseValidator
         return true;
     }
 
-    protected function getUniqueRule($table, $id)
+    protected function getUniqueRule($table, $id = 0)
     {
-        return Rule::unique($table)->ignore($id);
+        $rule = Rule::unique($table);
+
+        if ($id > 0) {
+            $rule = $rule->ignore($id);
+        }
+        return $rule;
     }
 }

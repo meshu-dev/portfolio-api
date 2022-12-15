@@ -16,7 +16,7 @@ class ImageCheckService
         $projects = $this->projectRepository->getByTechnology($imageId);
         $prototypes = $this->prototypeRepository->getByTechnology($imageId); 
 
-        if (empty($projects) === true && empty($prototypes) === true) {
+        if ($projects->count() === 0 && $prototypes->count() === 0) {
             return false;
         }
         return true;

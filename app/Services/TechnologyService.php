@@ -16,7 +16,7 @@ class TechnologyService
         $projects = $this->projectRepository->getByTechnology($technologyId);
         $prototypes = $this->prototypeRepository->getByTechnology($technologyId); 
 
-        if (empty($projects) === true && empty($prototypes) === true) {
+        if ($projects->count() === 0 && $prototypes->count() === 0) {
             return false;
         }
         return true;
