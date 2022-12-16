@@ -5,11 +5,11 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class TypeTest extends TestCase
+class TechnologyTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected $url = '/api/types';
+    protected $url = '/api/technologies';
 
     protected $structure = [
         'id',
@@ -19,30 +19,30 @@ class TypeTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->typeService = $this->app->make('Tests\Services\TypeService');
+        $this->technologyService = $this->app->make('Tests\Services\TechnologyService');
     }
 
-    public function test_getting_type_by_id()
+    public function test_getting_technology_by_id()
     {
         $this->setupAuth();
 
-        $type = $this->typeService->addType();
+        $technology = $this->technologyService->addTechnology();
 
-        $this->json('GET', "{$this->url}/{$type->id}")
+        $this->json('GET', "{$this->url}/{$technology->id}")
             ->assertOk()
             ->assertJsonStructure([
                 'data' => $this->structure
             ]);
     }
 
-    public function test_stop_getting_type_by_id_with_no_token()
+    public function test_stop_getting_technology_by_id_with_no_token()
     {
-        $type = $this->typeService->addType();
+        $technology = $this->technologyService->addTechnology();
 
-        $this->testUnauthorised('GET', "{$this->url}/{$type->id}");
+        $this->testUnauthorised('GET', "{$this->url}/{$technology->id}");
     }
 
-    public function test_getting_empty_type_by_invalid_id()
+    public function test_getting_empty_technology_by_invalid_id()
     {
         $this->setupAuth();
 
@@ -52,11 +52,11 @@ class TypeTest extends TestCase
              ->assertStatus(422);
     }
 
-    public function test_getting_list_of_types()
+    public function test_getting_list_of_technologies()
     {
         $this->setupAuth();
 
-        $this->typeService->addTypes();
+        $this->technologyService->addTechnologies();
 
         $this->json('GET', $this->url)
             ->assertOk()
@@ -67,14 +67,14 @@ class TypeTest extends TestCase
             ]);
     }
 
-    public function test_stop_getting_list_of_types_with_no_token()
+    public function test_stop_getting_list_of_technologies_with_no_token()
     {
-        $this->typeService->addTypes();
+        $this->technologyService->addTechnologies();
 
         $this->testUnauthorised('GET', $this->url);
     }
 
-    public function test_getting_empty_list_of_types()
+    public function test_getting_empty_list_of_technologies()
     {
         $this->setupAuth();
 
@@ -85,7 +85,7 @@ class TypeTest extends TestCase
             ]);
     }
 
-    public function test_adding_type()
+    public function test_adding_technology()
     {
         $this->setupAuth();
 
@@ -105,7 +105,7 @@ class TypeTest extends TestCase
             ]);
     }
 
-    public function test_stop_adding_type_with_no_token()
+    public function test_stop_adding_technology_with_no_token()
     {
         $params = [
             'name' => 'Development'
@@ -114,11 +114,11 @@ class TypeTest extends TestCase
         $this->testUnauthorised('POST', $this->url, $params);
     }
 
-    public function test_stop_adding_type_with_duplicate_name()
+    public function test_stop_adding_technology_with_duplicate_name()
     {
         $this->setupAuth();
 
-        $this->typeService->addType();
+        $this->technologyService->addTechnology();
 
         $params = [
             'name' => 'Development'
@@ -128,12 +128,12 @@ class TypeTest extends TestCase
              ->assertStatus(422);
     }
 
-    public function test_editing_type()
+    public function test_editing_technology()
     {
         $this->setupAuth();
 
-        $type = $this->typeService->addType();
-        $id = $type->id;
+        $technology = $this->technologyService->addTechnology();
+        $id = $technology->id;
 
         $params = [
             'name' => 'Staging'
@@ -149,11 +149,11 @@ class TypeTest extends TestCase
             ]);
     }
 
-    public function test_stop_editing_type_with_no_token()
+    public function test_stop_editing_technology_with_no_token()
     {
-        $type = $this->typeService->addType();
+        $technology = $this->technologyService->addTechnology();
 
-        $id = $type->id;
+        $id = $technology->id;
         $params = [
             'name' => 'Staging'
         ];
@@ -161,12 +161,12 @@ class TypeTest extends TestCase
         $this->testUnauthorised('PUT', "{$this->url}/{$id}", $params);
     }
 
-    public function test_stop_editing_type_with_duplicate_name()
+    public function test_stop_editing_technology_with_duplicate_name()
     {
         $this->setupAuth();
 
-        $types = $this->typeService->addTypes();
-        $id = $types[0]['id'];
+        $technologies = $this->technologyService->addTechnologies();
+        $id = $technologies[0]['id'];
 
         $params = [
             'name' => 'Staging'
@@ -176,26 +176,26 @@ class TypeTest extends TestCase
              ->assertStatus(422);
     } 
 
-    public function test_deleting_type()
+    public function test_deleting_technology()
     {
         $this->setupAuth();
 
-        $type = $this->typeService->addType();
-        $id = $type->id;
+        $technology = $this->technologyService->addTechnology();
+        $id = $technology->id;
 
         $this->json('DELETE', "{$this->url}/{$id}")
              ->assertNoContent();
     }
 
-    public function test_stop_deleting_type_with_no_token()
+    public function test_stop_deleting_technology_with_no_token()
     {
-        $type = $this->typeService->addType();
-        $id = $type->id;
+        $technology = $this->technologyService->addTechnology();
+        $id = $technology->id;
 
         $this->testUnauthorised('DELETE', "{$this->url}/{$id}");
     }
 
-    public function test_stop_deleting_type_with_invalid_id()
+    public function test_stop_deleting_technology_with_invalid_id()
     {
         $this->setupAuth();
 

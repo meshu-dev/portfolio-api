@@ -9,4 +9,9 @@ class ImageThumbnailRepository extends ModelRepository
     {
         parent::__construct($image);
     }
+
+    public function deleteByImageId($imageId)
+    {
+        return $this->model->where('image_id', $imageId)->delete();
+    }
 }

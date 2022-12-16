@@ -24,6 +24,12 @@ class ImageService
         return $image;
     }
 
+    public function delete($imageId)
+    {
+        $this->imageThumbnailRepository->deleteByImageId($imageId);
+        $this->imageRepository->delete($imageId);
+    }
+
     protected function addThumb($imageId, $name, $file)
     {
         $path = 'app/test/thumbs';

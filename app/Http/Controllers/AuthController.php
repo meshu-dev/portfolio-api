@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Validator;
 
+use Illuminate\Support\Facades\Cookie;
+
+
 class AuthController extends Controller
 {
     /**
@@ -32,16 +35,19 @@ class AuthController extends Controller
         }
 
         //$credentials = $request->only('email', 'password');
-
         //$token = auth('api')->attempt($credentials);
-
         //return $this->createNewToken($token);
     
         $user = User::where('email', $request->email)->first();
+        $token = $user->createToken("API TOKEN")->plainTextToken;
 
-        return response()->json([
-            'token' => $user->createToken("API TOKEN")->plainTextToken
-        ], 200);
+        $cookie = cookie(
+            'access_token', $token, 60, '/', '127.0.0.1', false, true, false
+        );
+
+        return response()
+            ->json(['token' => $token], 200)
+            ->withCookie($cookie);
     }
     
     /**

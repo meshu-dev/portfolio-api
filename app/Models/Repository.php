@@ -8,4 +8,6 @@ class Repository extends BaseModel
     use HasFactory;
 
     protected $table = 'repositories';
+
+    protected $fillable = ['name', 'url'];
 }
