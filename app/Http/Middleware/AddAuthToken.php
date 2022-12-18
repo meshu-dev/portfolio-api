@@ -4,17 +4,20 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use App\Services\AuthCookieService;
 
 class AddAuthToken
 {
+    public function __construct(
+        protected AuthCookieService $authCookieService
+    ) { }
+
     public function handle(Request $request, Closure $next)
     {
-        $cookieName = env('AUTH_COOKIE_NAME');
+        if ($request->bearerToken() == null) {
+            $token = $this->authCookieService->getToken($request);
 
-        if ($request->bearerToken() == null) {    
-            if ($request->hasCookie($cookieName) === true) {
-                $token = $request->cookie($cookieName);
-
+            if ($token) {
                 $request->headers->add([
                     'Authorization' => "Bearer $token"
                 ]);
