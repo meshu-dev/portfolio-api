@@ -49,11 +49,10 @@ class PrototypeRepository extends ModelRepository
                            ->groupBy('type_id')
                            ->get();
 
-        $types = [];
+        $types = $prototypes->map(function($prototype) {
+            return $prototype->type;
+        });
 
-        foreach ($prototypes as $prototype) {
-            $types[] = $prototype->type;
-        }
         return $types;
     }
 

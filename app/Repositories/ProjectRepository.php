@@ -49,11 +49,10 @@ class ProjectRepository extends ModelRepository
                          ->groupBy('type_id')
                          ->get();
 
-        $types = [];
+        $types = $projects->map(function($project) {
+            return $project->type;
+        });
 
-        foreach ($projects as $project) {
-            $types[] = $project->type;
-        }
         return $types;
     }
 
