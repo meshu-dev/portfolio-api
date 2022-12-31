@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\PrototypeRepository;
 use App\Http\Resources\PrototypeResource;
+use App\Http\Resources\TypeResource;
 use App\Validators\PrototypeValidator;
 
 class PrototypeController extends Controller
@@ -32,6 +33,14 @@ class PrototypeController extends Controller
         $row = $this->prototypeRepository->get($id);
 
         return $this->getResponse($row);
+    }
+
+    public function getTypes(Request $request)
+    {
+        $this->resource = TypeResource::class;
+        $rows = $this->prototypeRepository->getTypes();
+
+        return $this->getResponse($rows, 200);
     }
 
     public function getAll(Request $request)

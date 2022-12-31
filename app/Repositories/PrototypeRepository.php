@@ -42,6 +42,21 @@ class PrototypeRepository extends ModelRepository
         return $prototype;
     }
 
+    public function getTypes()
+    {
+        $prototypes = $this->model
+                           ->select('type_id')
+                           ->groupBy('type_id')
+                           ->get();
+
+        $types = [];
+
+        foreach ($prototypes as $prototype) {
+            $types[] = $prototype->type;
+        }
+        return $types;
+    }
+
     public function getByType($id)
     {
         return $this->model->where('type_id', $id)->get();

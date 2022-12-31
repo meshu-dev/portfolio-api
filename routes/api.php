@@ -45,6 +45,7 @@ Route::middleware('auth:sanctum')->group(function ($router) {
 
     Route::group(['prefix' => 'projects'], function ($router) {
         Route::get('/', [ProjectController::class, 'getAll']);
+        Route::get('/types', [ProjectController::class, 'getTypes']);
         Route::get('/{id}', [ProjectController::class, 'get']);
         Route::post('/', [ProjectController::class, 'add']);
         Route::put('/{id}', [ProjectController::class, 'edit']);
@@ -53,6 +54,7 @@ Route::middleware('auth:sanctum')->group(function ($router) {
 
     Route::group(['prefix' => 'prototypes'], function ($router) {
         Route::get('/', [PrototypeController::class, 'getAll']);
+        Route::get('/types', [PrototypeController::class, 'getTypes']);
         Route::get('/{id}', [PrototypeController::class, 'get']);
         Route::post('/', [PrototypeController::class, 'add']);
         Route::put('/{id}', [PrototypeController::class, 'edit']);
@@ -64,7 +66,7 @@ Route::middleware('auth:sanctum')->group(function ($router) {
         Route::get('/{id}', [TypeController::class, 'get']);
         Route::post('/', [TypeController::class, 'add']);
         Route::put('/{id}', [TypeController::class, 'edit']);
-        Route::delete('/{id}', [TypeController::class, 'delete']);    
+        Route::delete('/{id}', [TypeController::class, 'delete']);
     });
 
     Route::group(['prefix' => 'repositories'], function ($router) {

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Repositories\ProjectRepository;
 use App\Http\Resources\ProjectResource;
+use App\Http\Resources\TypeResource;
 use App\Validators\ProjectValidator;
 
 class ProjectController extends Controller
@@ -32,6 +33,14 @@ class ProjectController extends Controller
         $row = $this->projectRepository->get($id);
 
         return $this->getResponse($row);
+    }
+
+    public function getTypes(Request $request)
+    {
+        $this->resource = TypeResource::class;
+        $rows = $this->projectRepository->getTypes();
+
+        return $this->getResponse($rows, 200);
     }
 
     public function getAll(Request $request)

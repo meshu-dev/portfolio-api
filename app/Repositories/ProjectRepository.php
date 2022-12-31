@@ -42,6 +42,21 @@ class ProjectRepository extends ModelRepository
         return $project;
     }
 
+    public function getTypes()
+    {
+        $projects = $this->model
+                         ->select('type_id')
+                         ->groupBy('type_id')
+                         ->get();
+
+        $types = [];
+
+        foreach ($projects as $project) {
+            $types[] = $project->type;
+        }
+        return $types;
+    }
+
     public function getByType($id)
     {
         return $this->model->where('type_id', $id)->get();
