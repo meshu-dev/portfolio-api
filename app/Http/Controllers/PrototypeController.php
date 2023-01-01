@@ -43,12 +43,11 @@ class PrototypeController extends Controller
         return $this->getResponse($rows, 200);
     }
 
-    public function getAll(Request $request)
+    public function getAll()
     {
-        $params = $request->all();
-        $rows = $this->prototypeRepository->getAll($params);
+        $pagination = $this->prototypeRepository->getPagination();
 
-        return $this->getResponse($rows, 200);
+        return $this->getPaginatedResponse($pagination);
     }
 
     public function edit(Request $request, int $id)

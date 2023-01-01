@@ -43,12 +43,11 @@ class ImageController extends Controller
         return $this->getResponse($row);
     }
 
-    public function getAll(Request $request)
+    public function getAll()
     {
-        $params = $request->all();
-        $rows = $this->imageRepository->getAll($params);
+        $pagination = $this->imageRepository->getPagination();
 
-        return $this->getResponse($rows, 200);
+        return $this->getPaginatedResponse($pagination);
     }
 
     public function delete(Request $request, int $id)

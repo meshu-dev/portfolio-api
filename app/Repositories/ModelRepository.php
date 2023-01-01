@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 abstract class ModelRepository implements Repository
 {
-    private const ROW_LIMIT = 20;
+    private const ROW_LIMIT = 10;
 
     protected $model;
 
@@ -110,5 +110,10 @@ abstract class ModelRepository implements Repository
         }
 
         return $this->model->where($params)->count();
+    }
+
+    public function getPagination()
+    {
+        return $this->model->paginate(self::ROW_LIMIT);
     }
 }

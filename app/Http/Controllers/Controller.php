@@ -39,4 +39,19 @@ class Controller extends BaseController
 
         return $response;
     }
+
+    public function getPaginatedResponse(
+        $pagination,
+        array $headers = []
+    ) {
+        if ($pagination) {
+            $response = call_user_func($this->resource . '::collection', $pagination);
+        }
+
+        if (empty($headers) === false) {
+            $response->withHeaders($headers);
+        }
+
+        return $response;
+    }
 }
