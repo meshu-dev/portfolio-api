@@ -112,8 +112,11 @@ abstract class ModelRepository implements Repository
         return $this->model->where($params)->count();
     }
 
-    public function getPagination()
+    public function getPagination($limit = null)
     {
-        return $this->model->paginate(self::ROW_LIMIT);
+        if ($limit === null) {
+            $limit = self::ROW_LIMIT;
+        }
+        return $this->model->paginate($limit);
     }
 }
