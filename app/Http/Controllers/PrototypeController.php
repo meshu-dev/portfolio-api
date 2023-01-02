@@ -43,7 +43,7 @@ class PrototypeController extends Controller
         return $this->getResponse($rows, 200);
     }
 
-    public function getAll()
+    public function getPaginated()
     {
         $pagination = $this->prototypeRepository->getPagination();
 

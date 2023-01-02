@@ -34,9 +34,13 @@ class RepositoryController extends Controller
         return $this->getResponse($row);
     }
 
-    public function getAll()
+    public function getPaginated(Request $request)
     {
-        $pagination = $this->repositoryRepository->getPagination();
+        $params = $request->all();
+
+        $pagination = $this->repositoryRepository->getPagination(
+            $params['limit'] ?? null
+        );
 
         return $this->getPaginatedResponse($pagination);
     }

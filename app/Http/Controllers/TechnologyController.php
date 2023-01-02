@@ -34,9 +34,13 @@ class TechnologyController extends Controller
         return $this->getResponse($row);
     }
 
-    public function getAll()
+    public function getPaginated(Request $request)
     {
-        $pagination = $this->technologyRepository->getPagination();
+        $params = $request->all();
+        
+        $pagination = $this->technologyRepository->getPagination(
+            $params['limit'] ?? null
+        );
 
         return $this->getPaginatedResponse($pagination);
     }

@@ -34,9 +34,13 @@ class TypeController extends Controller
         return $this->getResponse($row);
     }
 
-    public function getAll()
+    public function getPaginated(Request $request)
     {
-        $pagination = $this->typeRepository->getPagination();
+        $params = $request->all();
+
+        $pagination = $this->typeRepository->getPagination(
+            $params['limit'] ?? null
+        );
 
         return $this->getPaginatedResponse($pagination);
     }

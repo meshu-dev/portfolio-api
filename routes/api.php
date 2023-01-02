@@ -44,7 +44,7 @@ Route::middleware('auth:sanctum')->group(function ($router) {
     });
 
     Route::group(['prefix' => 'projects'], function ($router) {
-        Route::get('/', [ProjectController::class, 'getAll']);
+        Route::get('/', [ProjectController::class, 'getPaginated']);
         Route::get('/types', [ProjectController::class, 'getTypes']);
         Route::get('/{id}', [ProjectController::class, 'get']);
         Route::post('/', [ProjectController::class, 'add']);
@@ -53,7 +53,7 @@ Route::middleware('auth:sanctum')->group(function ($router) {
     });
 
     Route::group(['prefix' => 'prototypes'], function ($router) {
-        Route::get('/', [PrototypeController::class, 'getAll']);
+        Route::get('/', [PrototypeController::class, 'getPaginated']);
         Route::get('/types', [PrototypeController::class, 'getTypes']);
         Route::get('/{id}', [PrototypeController::class, 'get']);
         Route::post('/', [PrototypeController::class, 'add']);
@@ -62,7 +62,7 @@ Route::middleware('auth:sanctum')->group(function ($router) {
     });
 
     Route::group(['prefix' => 'types'], function ($router) {
-        Route::get('/', [TypeController::class, 'getAll']);
+        Route::get('/', [TypeController::class, 'getPaginated']);
         Route::get('/{id}', [TypeController::class, 'get']);
         Route::post('/', [TypeController::class, 'add']);
         Route::put('/{id}', [TypeController::class, 'edit']);
@@ -70,7 +70,7 @@ Route::middleware('auth:sanctum')->group(function ($router) {
     });
 
     Route::group(['prefix' => 'repositories'], function ($router) {
-        Route::get('/', [RepositoryController::class, 'getAll']);
+        Route::get('/', [RepositoryController::class, 'getPaginated']);
         Route::get('/{id}', [RepositoryController::class, 'get']);
         Route::post('/', [RepositoryController::class, 'add']);
         Route::put('/{id}', [RepositoryController::class, 'edit']);
@@ -78,7 +78,7 @@ Route::middleware('auth:sanctum')->group(function ($router) {
     });
 
     Route::group(['prefix' => 'technologies'], function ($router) {
-        Route::get('/', [TechnologyController::class, 'getAll']);
+        Route::get('/', [TechnologyController::class, 'getPaginated']);
         Route::get('/{id}', [TechnologyController::class, 'get']);
         Route::post('/', [TechnologyController::class, 'add']);
         Route::put('/{id}', [TechnologyController::class, 'edit']);
