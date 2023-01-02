@@ -115,6 +115,11 @@ return new class extends Migration
             $table->foreign('prototype_id')->references('id')->on('prototypes');
             $table->foreign('image_id')->references('id')->on('images');
         });
+
+        Schema::create('about', function (Blueprint $table) {
+            $table->id();
+            $table->string('text');
+        });
     }
 
     /**
@@ -139,6 +144,7 @@ return new class extends Migration
         Schema::dropIfExists('project_repositories');
         Schema::dropIfExists('project_technologies');
         Schema::dropIfExists('project_images');
+        Schema::dropIfExists('about');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }

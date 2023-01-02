@@ -11,7 +11,7 @@ use App\Http\Controllers\TypeController;
 use App\Http\Controllers\RepositoryController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\ImageController;
-
+use App\Http\Controllers\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,5 +93,8 @@ Route::middleware('auth:sanctum')->group(function ($router) {
         Route::delete('/{id}', [ImageController::class, 'delete']);    
     });
 
-
+    Route::group(['prefix' => 'about'], function ($router) {
+        Route::get('/', [AboutController::class, 'get']);
+        Route::put('/{id}', [AboutController::class, 'edit']);
+    });
 });
