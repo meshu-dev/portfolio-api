@@ -12,12 +12,13 @@ class PrototypeValidator extends ApiValidator
     protected $rules = [
         'name' => [
             'required',
+            'min:3',
             'max:100'
         ],
         'description' => 'required',
-        'typeId' => 'required',
-        'repositoryIds' => 'required',
-        'technologyIds' => 'required'
+        'typeId' => 'required|exists:App\Models\Type,id',
+        'repositoryIds' => 'required|array',
+        'technologyIds' => 'required|array'
     ];
 
     public function verifyAdd(array $params): ValidationException|bool

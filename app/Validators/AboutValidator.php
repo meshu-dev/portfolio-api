@@ -11,6 +11,6 @@ class AboutValidator extends ApiValidator
     ];
 
     protected $rules = [
-        'text' => 'required|max:500'
+        'text' => 'required|min:3|max:500'
     ];
 }
