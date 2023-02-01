@@ -14,6 +14,8 @@ class AboutSeeder extends Seeder
      */
     public function run()
     {
-        About::factory()->create();
+        About::factory([
+            'text' => ''
+        ])->create();
     }
 }
