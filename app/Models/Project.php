@@ -8,7 +8,7 @@ class Project extends BaseModel
     use HasFactory;
 
     protected $table = 'projects';
-    protected $fillable = ['type_id', 'name', 'description'];
+    protected $fillable = ['type_id', 'name', 'description', 'url'];
 
     public function type()
     {

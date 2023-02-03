@@ -16,6 +16,7 @@ class ProjectValidator extends ApiValidator
             'max:100'
         ],
         'description' => 'required',
+        'url' => 'required|url',
         'typeId' => 'required|exists:App\Models\Type,id',
         'repositoryIds' => 'required|array',
         'technologyIds' => 'required|array'

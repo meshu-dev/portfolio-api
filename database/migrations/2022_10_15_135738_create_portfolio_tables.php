@@ -47,6 +47,7 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id');
             $table->string('name');
             $table->string('description');
+            $table->string('url');
             $table->smallInteger('order')->default(0);
 
             $table->foreign('type_id')->references('id')->on('types');
@@ -84,6 +85,7 @@ return new class extends Migration
             $table->unsignedBigInteger('type_id');
             $table->string('name');
             $table->string('description');
+            $table->string('url');
             $table->smallInteger('order')->default(0);
 
             $table->foreign('type_id')->references('id')->on('types');

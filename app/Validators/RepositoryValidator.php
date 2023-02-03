@@ -15,7 +15,8 @@ class RepositoryValidator extends ApiValidator
             'required',
             'min:3',
             'max:100'
-        ]
+        ],
+        'url' => 'required|url'
     ];
 
     public function __construct(protected RepositoryService $repositoryService) { }
