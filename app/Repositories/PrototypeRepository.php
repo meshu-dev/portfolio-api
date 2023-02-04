@@ -15,7 +15,8 @@ class PrototypeRepository extends ModelRepository
         $modelParams = [
             'type_id' => $params['typeId'],
             'name' => $params['name'],
-            'description' => $params['description']
+            'description' => $params['description'],
+            'url' => $params['url']
         ];
         $prototype = parent::add($modelParams);
 
@@ -33,6 +34,7 @@ class PrototypeRepository extends ModelRepository
         $prototype->type_id = $params['typeId'];
         $prototype->name = $params['name'];
         $prototype->description = $params['description'];
+        $prototype->url = $params['url'];
         $prototype->save();
 
         $prototype->repositories()->sync($params['repositoryIds'] ?? []);

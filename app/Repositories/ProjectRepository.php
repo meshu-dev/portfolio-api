@@ -15,7 +15,8 @@ class ProjectRepository extends ModelRepository
         $modelParams = [
             'type_id' => $params['typeId'],
             'name' => $params['name'],
-            'description' => $params['description']
+            'description' => $params['description'],
+            'url' => $params['url']
         ];
         $project = parent::add($modelParams);
 
@@ -33,6 +34,7 @@ class ProjectRepository extends ModelRepository
         $project->type_id = $params['typeId'];
         $project->name = $params['name'];
         $project->description = $params['description'];
+        $project->url = $params['url'];
         $project->save();
 
         $project->repositories()->sync($params['repositoryIds'] ?? []);
