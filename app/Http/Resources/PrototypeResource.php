@@ -19,6 +19,7 @@ class PrototypeResource extends JsonResource
             'type' => new TypeResource($this->type),
             'name' => $this->name,
             'description' => $this->description,
+            'url' => $this->url,
             'repositories' => RepositoryResource::collection($this->repositories),
             'technologies' => TechnologyResource::collection($this->technologies),
             'images' => ImageResource::collection($this->images)
