@@ -20,7 +20,7 @@ class ImageValidator extends ApiValidator
     {
     }
 
-    public function verifyDelete(int $id): ValidationException|bool
+    public function verifyDelete(int $id): ValidationException | bool
     {
         $this->verifyExists($id);
 

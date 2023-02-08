@@ -24,21 +24,21 @@ class RepositoryValidator extends ApiValidator
     {
     }
 
-    public function verifyAdd(array $params): ValidationException|bool
+    public function verifyAdd(array $params): ValidationException | bool
     {
         $this->addUniqueRule();
 
         return parent::verifyAdd($params);
     }
 
-    public function verifyEdit(int $id, array $params): ValidationException|bool
+    public function verifyEdit(int $id, array $params): ValidationException | bool
     {
         $this->addUniqueRule($id);
 
         return parent::verifyEdit($id, $params);
     }
 
-    public function verifyDelete(int $id): ValidationException|bool
+    public function verifyDelete(int $id): ValidationException | bool
     {
         $this->verifyExists($id);
 
