@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Services;
 
 use App\Repositories\ProjectRepository;
@@ -9,7 +10,8 @@ class TypeService
     public function __construct(
         protected ProjectRepository $projectRepository,
         protected PrototypeRepository $prototypeRepository
-    ) { }
+    ) {
+    }
 
     public function isUsed($typeId)
     {

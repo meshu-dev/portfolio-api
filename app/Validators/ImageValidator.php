@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Validators;
 
 use App\Exceptions\ValidationException;
@@ -15,12 +16,14 @@ class ImageValidator extends ApiValidator
         'thumb' => 'in:true,false'
     ];
 
-    public function __construct(protected ImageCheckService $imageCheckService) { }
+    public function __construct(protected ImageCheckService $imageCheckService)
+    {
+    }
 
     public function verifyDelete(int $id): ValidationException|bool
     {
         $this->verifyExists($id);
-        
+
         $isUsed = $this->imageCheckService->isUsed($id);
 
         if ($isUsed === true) {

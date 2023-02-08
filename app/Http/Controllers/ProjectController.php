@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,13 +15,14 @@ class ProjectController extends Controller
     public function __construct(
         protected ProjectRepository $projectRepository,
         protected ProjectValidator $projectValidator
-    ) { }
+    ) {
+    }
 
     public function add(Request $request)
     {
         $params = $request->all();
         $this->projectValidator->verifyAdd($params);
-        
+
         $row = $this->projectRepository->add($params);
 
         return $this->getResponse($row, 201);

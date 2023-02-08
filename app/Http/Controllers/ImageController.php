@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class ImageController extends Controller
         protected ImageRepository $imageRepository,
         protected ImageValidator $imageValidator,
         protected ImageService $imageService
-    ) { }
+    ) {
+    }
 
     public function add(Request $request)
     {

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -14,13 +15,14 @@ class PrototypeController extends Controller
     public function __construct(
         protected PrototypeRepository $prototypeRepository,
         protected PrototypeValidator $prototypeValidator
-    ) { }
+    ) {
+    }
 
     public function add(Request $request)
     {
         $params = $request->all();
         $this->prototypeValidator->verifyAdd($params);
-        
+
         $row = $this->prototypeRepository->add($params);
 
         return $this->getResponse($row, 201);

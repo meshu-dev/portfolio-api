@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,13 +14,14 @@ class TechnologyController extends Controller
     public function __construct(
         protected TechnologyRepository $technologyRepository,
         protected TechnologyValidator $technologyValidator
-    ) { }
+    ) {
+    }
 
     public function add(Request $request)
     {
         $params = $request->all();
         $this->technologyValidator->verifyAdd($params);
-        
+
         $row = $this->technologyRepository->add($params);
 
         return $this->getResponse($row, 201);
@@ -37,7 +39,7 @@ class TechnologyController extends Controller
     public function getPaginated(Request $request)
     {
         $params = $request->all();
-        
+
         $pagination = $this->technologyRepository->getPagination(
             $params['limit'] ?? null
         );

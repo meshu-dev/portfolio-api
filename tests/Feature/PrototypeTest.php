@@ -26,7 +26,7 @@ class PrototypeTest extends TestCase
         $this->prototypeService = $this->app->make('Tests\Services\PrototypeService');
     }
 
-    
+
     public function test_getting_project_by_id()
     {
         $this->setupAuth();
@@ -221,7 +221,7 @@ class PrototypeTest extends TestCase
         $projects = $this->prototypeService->addPrototypes();
         $firstProject = $projects[0];
         $secondProject = $projects[1];
-        
+
         $id = $firstProject->id;
 
         $data = $this->prototypeService->addRelatedData();
@@ -241,7 +241,7 @@ class PrototypeTest extends TestCase
 
         $this->json('PUT', "{$this->url}/{$id}", $params)
              ->assertStatus(422);
-    } 
+    }
 
     public function test_deleting_project()
     {

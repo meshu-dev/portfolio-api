@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,7 +14,8 @@ class AboutController extends Controller
     public function __construct(
         protected AboutRepository $aboutRepository,
         protected AboutValidator $aboutValidator
-    ) { }
+    ) {
+    }
 
     public function get(Request $request)
     {

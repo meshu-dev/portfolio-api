@@ -38,7 +38,7 @@ class PrototypeService extends PortfolioService
         }
 
         $technologies = $this->technologyService->addTechnologies();
-        
+
         foreach ($technologies as $technology) {
             $prototype->technologies()->attach($technology->id);
         }

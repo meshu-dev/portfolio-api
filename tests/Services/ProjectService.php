@@ -31,7 +31,7 @@ class ProjectService extends PortfolioService
             'name' => 'CRUD Project',
             'description' => 'Test Job Title'
         ]);
-        
+
         $this->attachRepositories($project, $data['repositories'] ?? []);
         $this->attachTechnologies($project, $data['technologies'] ?? []);
         $this->attachImages($project, $data['images'] ?? []);

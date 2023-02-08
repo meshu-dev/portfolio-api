@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Validators;
 
-use Illuminate\Validation\Rule;
 use App\Exceptions\ValidationException;
 use App\Services\TypeService;
 
@@ -19,7 +19,9 @@ class TypeValidator extends ApiValidator
         ]
     ];
 
-    public function __construct(protected TypeService $typeService) { }
+    public function __construct(protected TypeService $typeService)
+    {
+    }
 
     public function verifyAdd(array $params): ValidationException|bool
     {
@@ -38,7 +40,7 @@ class TypeValidator extends ApiValidator
     public function verifyDelete(int $id): ValidationException|bool
     {
         $this->verifyExists($id);
-        
+
         $isUsed = $this->typeService->isUsed($id);
 
         if ($isUsed === true) {

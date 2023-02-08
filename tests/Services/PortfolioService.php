@@ -9,7 +9,8 @@ class PortfolioService
         protected RepositoryService $repositoryService,
         protected TechnologyService $technologyService,
         protected ImageService $imageService
-    ) { }
+    ) {
+    }
 
     public function addRelatedData()
     {

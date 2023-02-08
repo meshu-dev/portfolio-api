@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Services;
 
-use Illuminate\Support\Facades\Storage;
 use App\Repositories\ImageRepository;
 use App\Repositories\ImageThumbnailRepository;
 use Image;
@@ -11,7 +11,8 @@ class ImageService
     public function __construct(
         protected ImageRepository $imageRepository,
         protected ImageThumbnailRepository $imageThumbnailRepository
-    ) { }
+    ) {
+    }
 
     public function add($name, $file, $includeThumb = false)
     {
@@ -45,7 +46,7 @@ class ImageService
     }
 
     protected function addUploadedImage($name, $file)
-    {   
+    {
         $path = 'app/test/uploads';
         $image = $this->addImage($name, $file, $path);
         $url = $this->getUrlPath('image', $image->basename);
@@ -64,7 +65,7 @@ class ImageService
                 $constraint->aspectRatio();
             });
         }
-        
+
         return $imgFile->save($filePath);
     }
 
@@ -86,7 +87,7 @@ class ImageService
     {
         $url = route($routeName, ['filename' => $filename]);
         $url = parse_url($url, PHP_URL_PATH);
-        
+
         return $url;
     }
 }

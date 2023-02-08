@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Project;
@@ -51,7 +52,7 @@ class ProjectRepository extends ModelRepository
                          ->groupBy('type_id')
                          ->get();
 
-        $types = $projects->map(function($project) {
+        $types = $projects->map(function ($project) {
             return $project->type;
         });
 

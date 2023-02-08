@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\Prototype;
@@ -51,7 +52,7 @@ class PrototypeRepository extends ModelRepository
                            ->groupBy('type_id')
                            ->get();
 
-        $types = $prototypes->map(function($prototype) {
+        $types = $prototypes->map(function ($prototype) {
             return $prototype->type;
         });
 

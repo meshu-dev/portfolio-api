@@ -183,7 +183,7 @@ class RepositoryTest extends TestCase
 
         $this->json('PUT', "{$this->url}/{$id}", $params)
              ->assertStatus(422);
-    } 
+    }
 
     public function test_deleting_repository()
     {

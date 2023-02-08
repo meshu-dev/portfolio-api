@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Validators;
 
 use App\Exceptions\ValidationException;
@@ -19,7 +20,9 @@ class RepositoryValidator extends ApiValidator
         'url' => 'required|url'
     ];
 
-    public function __construct(protected RepositoryService $repositoryService) { }
+    public function __construct(protected RepositoryService $repositoryService)
+    {
+    }
 
     public function verifyAdd(array $params): ValidationException|bool
     {
@@ -38,7 +41,7 @@ class RepositoryValidator extends ApiValidator
     public function verifyDelete(int $id): ValidationException|bool
     {
         $this->verifyExists($id);
-        
+
         $isUsed = $this->repositoryService->isUsed($id);
 
         if ($isUsed === true) {

@@ -26,7 +26,7 @@ class ProjectTest extends TestCase
         $this->projectService = $this->app->make('Tests\Services\ProjectService');
     }
 
-    
+
     public function test_getting_project_by_id()
     {
         $this->setupAuth();
@@ -221,7 +221,7 @@ class ProjectTest extends TestCase
         $projects = $this->projectService->addProjects();
         $firstProject = $projects[0];
         $secondProject = $projects[1];
-        
+
         $id = $firstProject->id;
 
         $data = $this->projectService->addRelatedData();
@@ -241,7 +241,7 @@ class ProjectTest extends TestCase
 
         $this->json('PUT', "{$this->url}/{$id}", $params)
              ->assertStatus(422);
-    } 
+    }
 
     public function test_deleting_project()
     {

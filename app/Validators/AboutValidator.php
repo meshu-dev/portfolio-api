@@ -1,8 +1,6 @@
 <?php
-namespace App\Validators;
 
-use Illuminate\Validation\Rule;
-use App\Exceptions\ValidationException;
+namespace App\Validators;
 
 class AboutValidator extends ApiValidator
 {

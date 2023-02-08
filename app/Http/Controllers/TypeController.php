@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -13,13 +14,14 @@ class TypeController extends Controller
     public function __construct(
         protected TypeRepository $typeRepository,
         protected TypeValidator $typeValidator
-    ) { }
+    ) {
+    }
 
     public function add(Request $request)
     {
         $params = $request->all();
         $this->typeValidator->verifyAdd($params);
-        
+
         $row = $this->typeRepository->add($params);
 
         return $this->getResponse($row, 201);

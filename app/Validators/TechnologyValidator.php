@@ -1,7 +1,7 @@
 <?php
+
 namespace App\Validators;
 
-use Illuminate\Validation\Rule;
 use App\Exceptions\ValidationException;
 use App\Services\TechnologyService;
 
@@ -19,7 +19,9 @@ class TechnologyValidator extends ApiValidator
         ]
     ];
 
-    public function __construct(protected TechnologyService $technologyService) { }
+    public function __construct(protected TechnologyService $technologyService)
+    {
+    }
 
     public function verifyAdd(array $params): ValidationException|bool
     {
@@ -38,7 +40,7 @@ class TechnologyValidator extends ApiValidator
     public function verifyDelete(int $id): ValidationException|bool
     {
         $this->verifyExists($id);
-        
+
         $isUsed = $this->technologyService->isUsed($id);
 
         if ($isUsed === true) {
