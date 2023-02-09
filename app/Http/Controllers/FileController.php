@@ -8,7 +8,7 @@ class FileController extends Controller
 {
     public function getImage(Request $request, string $filename)
     {
-        $storagePath = storage_path('app/test/uploads');
+        $storagePath = storage_path('app/uploads/images');
         $filePath = "$storagePath/$filename";
 
         return $this->getFileResponse($filePath);
@@ -16,7 +16,7 @@ class FileController extends Controller
 
     public function getThumb(Request $request, string $filename)
     {
-        $storagePath = storage_path('app/test/thumbs');
+        $storagePath = storage_path('app/uploads/thumbs');
         $filePath = "$storagePath/$filename";
 
         return $this->getFileResponse($filePath);

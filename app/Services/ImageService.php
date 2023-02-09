@@ -33,7 +33,7 @@ class ImageService
 
     protected function addThumb($imageId, $name, $file)
     {
-        $path = 'app/test/thumbs';
+        $path = 'app/uploads/thumbs';
         $image = $this->addImage($name, $file, $path, true);
         $url = $this->getUrlPath('thumb', $image->basename);
 
@@ -47,7 +47,7 @@ class ImageService
 
     protected function addUploadedImage($name, $file)
     {
-        $path = 'app/test/uploads';
+        $path = 'app/uploads/images';
         $image = $this->addImage($name, $file, $path);
         $url = $this->getUrlPath('image', $image->basename);
 
