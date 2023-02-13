@@ -101,9 +101,10 @@ class PrototypeTest extends TestCase
         $images = $data['images'];
 
         $params = [
+            'typeId' => $type->id,
             'name' => 'Test name',
             'description' => 'Test Job Title',
-            'typeId' => $type->id,
+            'url' => 'https://www.ign.com/uk',
             'repositoryIds' => $this->prototypeService->getRepositoryIds($repositories),
             'technologyIds' => $this->prototypeService->getTechnologyIds($technologies),
             'imageIds' => $this->prototypeService->getImageIds($images)
@@ -126,7 +127,8 @@ class PrototypeTest extends TestCase
     {
         $params = [
             'name' => 'Test name',
-            'description' => 'Test Job Title'
+            'description' => 'Test Job Title',
+            'url' => 'https://www.ign.com/uk'
         ];
 
         $this->testUnauthorised('POST', $this->url, $params);
@@ -145,9 +147,10 @@ class PrototypeTest extends TestCase
         $images = $data['images'];
 
         $params = [
+            'typeId' => $type->id,
             'name' => 'Prototype test app',
             'description' => 'Test Job Title',
-            'typeId' => $type->id,
+            'url' => 'https://www.ign.com/uk',
             'repositoryIds' => $this->prototypeService->getRepositoryIds($repositories),
             'technologyIds' => $this->prototypeService->getTechnologyIds($technologies),
             'imageIds' => $this->prototypeService->getImageIds($images)
@@ -171,9 +174,10 @@ class PrototypeTest extends TestCase
         $images = $data['images'];
 
         $params = [
+            'typeId' => $type->id,
             'name' => 'Test name',
             'description' => 'Test Job Title',
-            'typeId' => $type->id,
+            'url' => 'https://www.gamespot.com',
             'repositoryIds' => $this->prototypeService->getRepositoryIds($repositories),
             'technologyIds' => $this->prototypeService->getTechnologyIds($technologies),
             'imageIds' => $this->prototypeService->getImageIds($images)
@@ -203,9 +207,10 @@ class PrototypeTest extends TestCase
         $images = $data['images'];
 
         $params = [
+            'typeId' => $type->id,
             'name' => 'Test name',
             'description' => 'Test Job Title',
-            'typeId' => $type->id,
+            'url' => 'https://www.gamespot.com',
             'repositoryIds' => $this->prototypeService->getRepositoryIds($repositories),
             'technologyIds' => $this->prototypeService->getTechnologyIds($technologies),
             'imageIds' => $this->prototypeService->getImageIds($images)

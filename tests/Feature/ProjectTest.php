@@ -15,6 +15,7 @@ class ProjectTest extends TestCase
         'id',
         'type',
         'name',
+        'url',
         'repositories',
         'technologies',
         'images'
@@ -101,9 +102,10 @@ class ProjectTest extends TestCase
         $images = $data['images'];
 
         $params = [
+            'typeId' => $type->id,
             'name' => 'Test name',
             'description' => 'Test Job Title',
-            'typeId' => $type->id,
+            'url' => 'https://www.ign.com/uk',
             'repositoryIds' => $this->projectService->getRepositoryIds($repositories),
             'technologyIds' => $this->projectService->getTechnologyIds($technologies),
             'imageIds' => $this->projectService->getImageIds($images)
@@ -117,7 +119,8 @@ class ProjectTest extends TestCase
             ->assertJson([
                 'data' => [
                     'name' => 'Test name',
-                    'description' => 'Test Job Title'
+                    'description' => 'Test Job Title',
+                    'url' => 'https://www.ign.com/uk'
                 ]
             ]);
     }
@@ -126,7 +129,8 @@ class ProjectTest extends TestCase
     {
         $params = [
             'name' => 'Test name',
-            'description' => 'Test Job Title'
+            'description' => 'Test Job Title',
+            'url' => 'https://www.ign.com/uk'
         ];
 
         $this->testUnauthorised('POST', $this->url, $params);
@@ -145,9 +149,10 @@ class ProjectTest extends TestCase
         $images = $data['images'];
 
         $params = [
+            'typeId' => $type->id,
             'name' => 'CRUD Project',
             'description' => 'Test Job Title',
-            'typeId' => $type->id,
+            'url' => 'https://www.ign.com/uk',
             'repositoryIds' => $this->projectService->getRepositoryIds($repositories),
             'technologyIds' => $this->projectService->getTechnologyIds($technologies),
             'imageIds' => $this->projectService->getImageIds($images)
@@ -171,9 +176,10 @@ class ProjectTest extends TestCase
         $images = $data['images'];
 
         $params = [
+            'typeId' => $type->id,
             'name' => 'Test name',
             'description' => 'Test Job Title',
-            'typeId' => $type->id,
+            'url' => 'https://www.gamespot.com',
             'repositoryIds' => $this->projectService->getRepositoryIds($repositories),
             'technologyIds' => $this->projectService->getTechnologyIds($technologies),
             'imageIds' => $this->projectService->getImageIds($images)
@@ -203,9 +209,10 @@ class ProjectTest extends TestCase
         $images = $data['images'];
 
         $params = [
+            'typeId' => $type->id,
             'name' => 'Test name',
             'description' => 'Test Job Title',
-            'typeId' => $type->id,
+            'url' => 'https://www.gamespot.com',
             'repositoryIds' => $this->projectService->getRepositoryIds($repositories),
             'technologyIds' => $this->projectService->getTechnologyIds($technologies),
             'imageIds' => $this->projectService->getImageIds($images)
@@ -231,9 +238,10 @@ class ProjectTest extends TestCase
         $images = $data['images'];
 
         $params = [
+            'typeId' => $type->id,
             'name' => $secondProject->name,
             'description' => 'Test Job Title',
-            'typeId' => $type->id,
+            'url' => 'https://www.gamespot.com',
             'repositoryIds' => $this->projectService->getRepositoryIds($repositories),
             'technologyIds' => $this->projectService->getTechnologyIds($technologies),
             'imageIds' => $this->projectService->getImageIds($images)

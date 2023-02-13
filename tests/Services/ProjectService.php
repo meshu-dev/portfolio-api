@@ -29,7 +29,8 @@ class ProjectService extends PortfolioService
         $project = Project::create([
             'type_id' => $type->id,
             'name' => 'CRUD Project',
-            'description' => 'Test Job Title'
+            'description' => 'Test Job Title',
+            'url' => 'https://www.ign.com/uk'
         ]);
 
         $this->attachRepositories($project, $data['repositories'] ?? []);

@@ -28,7 +28,8 @@ class PrototypeService extends PortfolioService
         $prototype = Prototype::create([
             'type_id' => $type->id,
             'name' => 'Prototype test app',
-            'description' => 'Test Job Title'
+            'description' => 'Test Job Title',
+            'url' => 'https://www.ign.com/uk'
         ]);
 
         $repositories = $this->repositoryService->addRepositories();
