@@ -25,7 +25,8 @@ class PrototypeFactory extends Factory
         return [
             'type_id' => fake()->randomElement($typeIds),
             'name' => fake()->company(),
-            'description' => fake()->text(200)
+            'description' => fake()->text(200),
+            'url' => fake()->url()
         ];
     }
 }
