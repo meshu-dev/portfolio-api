@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 abstract class UserRepository
 {
-    private const ROW_LIMIT = 1000;
+    protected const ROW_LIMIT = 1000;
 
     protected $model;
 

@@ -25,6 +25,18 @@ class ProjectRepository extends UserRepository
         return $project ?? null;
     }
 
+    public function getAll(int $userId, array $params)
+    {
+        $rowLimit = $params['per_page'] ?? self::ROW_LIMIT;
+
+        $model = $this->model->where('user_id', $userId);
+
+        if (isset($params['type_id']) === true) {
+            $model->where('type_id', $params['type_id']);
+        }        
+        return $model->paginate($rowLimit);
+    }
+
     public function edit(int $userId, int $id, array $params)
     {
         $updateParams = [

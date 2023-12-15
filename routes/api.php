@@ -45,7 +45,6 @@ Route::middleware('auth:sanctum')->group(function ($router) {
 
     Route::group(['prefix' => 'projects'], function ($router) {
         Route::get('/', [ProjectController::class, 'getAll']);
-        Route::get('/types', [ProjectController::class, 'getTypes']);
         Route::get('/{id}', [ProjectController::class, 'get']);
         Route::post('/', [ProjectController::class, 'add']);
         Route::put('/{id}', [ProjectController::class, 'edit']);
