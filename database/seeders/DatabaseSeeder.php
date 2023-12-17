@@ -12,11 +12,20 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        // Hardcoded data seeder
+        $this->call([
+            UserSeeder::class,
+            DataSeeder::class
+        ]);
+
+
+        // Randomly generated data seeders
+        /*
         $this->call([
             UserSeeder::class,
             TypeSeeder::class,
             ProjectSeeder::class,
             AboutSeeder::class
-        ]);
+        ]); */
     }
 }
