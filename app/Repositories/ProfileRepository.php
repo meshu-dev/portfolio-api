@@ -2,13 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Models\About;
+use App\Models\Profile;
 
-class AboutRepository extends UserRepository
+class ProfileRepository extends UserRepository
 {
-    public function __construct(About $about)
+    public function __construct(Profile $profile)
     {
-        parent::__construct($about);
+        parent::__construct($profile);
     }
 
     public function getByUserId(int $userId)

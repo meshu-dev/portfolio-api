@@ -89,10 +89,11 @@ return new class extends Migration
             $table->foreign('image_id')->references('id')->on('images');
         });
 
-        Schema::create('about', function (Blueprint $table) {
+        Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('text');
+            $table->date('employment_start_date');
 
             $table->foreign('user_id')->references('id')->on('users');
         });
@@ -111,7 +112,7 @@ return new class extends Migration
         Schema::dropIfExists('project_repositories');
         Schema::dropIfExists('project_technologies');
         Schema::dropIfExists('project_images');
-        Schema::dropIfExists('about');
+        Schema::dropIfExists('profiles');
 
         DB::statement('SET FOREIGN_KEY_CHECKS = 1');
     }

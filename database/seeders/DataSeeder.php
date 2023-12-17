@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\{
     User,
+    Profile,
     Project,
     Repository,
     Technology,
@@ -16,13 +17,13 @@ use App\Models\{
 class DataSeeder extends Seeder
 {
     protected const PROJECTS = [
-        ['name' => 'CV', 'description' => 'Digital version of my CV', 'url' => 'https://cv.meshu.app', 'order' => 1, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js', 'MongoDB'], 'repositories' => ['CV']],
-        ['name' => 'Mailer', 'description' => 'E-mailer sending service', 'url' => 'https://mailer.meshu.app', 'order' => 2, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js'], 'repositories' => ['Mailer']],
-        ['name' => 'Sites', 'description' => 'Tool to manage websites', 'url' => 'https://sites.meshu.app', 'order' => 3, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js', 'PostgreSQL'], 'repositories' => ['Sites']],
-        ['name' => 'Crypto', 'description' => 'Realtime cryptocurrency price list', 'url' => 'https://crypto.meshu.app', 'order' => 4, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js', 'MongoDB'], 'repositories' => ['Crypto', 'Crypto API']],
         ['name' => 'Backlog', 'description' => 'Backlog manager for movies and TV shows', 'url' => 'https://backlog.meshu.app', 'order' => 1, 'type' => 'PHP', 'technologies' => ['Laravel', 'MySQL', 'Vue.js'], 'repositories' => ['Backlog', 'Backlog API']],
         ['name' => 'Admin', 'description' => 'Admin panel to manage data', 'url' => 'https://admin.meshu.app', 'order' => 2, 'type' => 'PHP', 'technologies' => ['Laravel', 'MySQL', 'React'], 'repositories' => ['Admin', 'Portfolio API']],
         ['name' => 'RequireDev', 'description' => 'PHP / Javasript tutorial blog', 'url' => 'https://www.requiredev.com', 'order' => 3, 'type' => 'PHP', 'technologies' => ['Wordpress', 'React', 'Next.js', 'GraphQL'], 'repositories' => ['RequireDev', 'RequireDev WP']],
+        ['name' => 'CV', 'description' => 'Digital version of my CV', 'url' => 'https://cv.meshu.app', 'order' => 4, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js', 'MongoDB'], 'repositories' => ['CV']],
+        ['name' => 'Mailer', 'description' => 'E-mailer sending service', 'url' => 'https://mailer.meshu.app', 'order' => 5, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js'], 'repositories' => ['Mailer']],
+        ['name' => 'Sites', 'description' => 'Tool to manage websites', 'url' => 'https://sites.meshu.app', 'order' => 6, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js', 'PostgreSQL'], 'repositories' => ['Sites']],
+        ['name' => 'Crypto', 'description' => 'Realtime cryptocurrency price list', 'url' => 'https://crypto.meshu.app', 'order' => 7, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js', 'MongoDB'], 'repositories' => ['Crypto', 'Crypto API']],
     ];
     protected const REPOSITORIES = [
         ['name' => 'CV',            'url' => 'https://github.com/meshu-dev/cv'],
@@ -43,6 +44,8 @@ class DataSeeder extends Seeder
     public function run()
     {
         $user = User::firstOrFail();
+
+        $this->createProfile($user->id);
 
         $typeIds       = $this->createTypes($user->id);
         $technologyIds = $this->createTechnologies($user->id);
@@ -66,6 +69,15 @@ class DataSeeder extends Seeder
 
             $project->save();
         }
+    }
+
+    protected function createProfile(int $userId): void
+    {
+        Profile::create([
+            'user_id' => $userId,
+            'text' => '',
+            'employment_start_date' => '2010-05-01'
+        ]);
     }
 
     protected function createTypes(int $userId): array

@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\{User, About};
+use App\Models\{User, Profile};
 
-class AboutSeeder extends Seeder
+class ProfileSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,6 @@ class AboutSeeder extends Seeder
     {
         $user = User::firstOrFail();
 
-        About::factory(['user_id' => $user->id])->create();
+        Profile::factory(['user_id' => $user->id])->create();
     }
 }
