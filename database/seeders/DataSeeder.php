@@ -21,7 +21,7 @@ class DataSeeder extends Seeder
         ['name' => 'Admin', 'description' => 'Admin panel to manage data', 'url' => 'https://admin.meshu.app', 'order' => 2, 'type' => 'PHP', 'technologies' => ['Laravel', 'MySQL', 'React'], 'repositories' => ['Admin', 'Portfolio API']],
         ['name' => 'RequireDev', 'description' => 'PHP / Javasript tutorial blog', 'url' => 'https://www.requiredev.com', 'order' => 3, 'type' => 'PHP', 'technologies' => ['Wordpress', 'React', 'Next.js', 'GraphQL'], 'repositories' => ['RequireDev', 'RequireDev WP']],
         ['name' => 'CV', 'description' => 'Digital version of my CV', 'url' => 'https://cv.meshu.app', 'order' => 4, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js', 'MongoDB'], 'repositories' => ['CV']],
-        ['name' => 'Mailer', 'description' => 'E-mailer sending service', 'url' => 'https://mailer.meshu.app', 'order' => 5, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js'], 'repositories' => ['Mailer']],
+        ['name' => 'Mailer', 'description' => 'E-mail sender service', 'url' => 'https://mailer.meshu.app', 'order' => 5, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js'], 'repositories' => ['Mailer']],
         ['name' => 'Sites', 'description' => 'Tool to manage websites', 'url' => 'https://sites.meshu.app', 'order' => 6, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js', 'PostgreSQL'], 'repositories' => ['Sites']],
         ['name' => 'Crypto', 'description' => 'Realtime cryptocurrency price list', 'url' => 'https://crypto.meshu.app', 'order' => 7, 'type' => 'Javascript', 'technologies' => ['React', 'Next.js', 'MongoDB'], 'repositories' => ['Crypto', 'Crypto API']],
     ];

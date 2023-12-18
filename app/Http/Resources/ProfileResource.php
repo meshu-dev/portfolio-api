@@ -13,7 +13,7 @@ class ProfileResource extends JsonResource
             'id'   => $this->id,
             'text' => $this->text,
             'employmentStartDate' => $this->employment_start_date,
-            'years_experience' => $this->years_experience
+            'yearsExperience' => $this->years_experience
         ];
     }
 }
